@@ -58,6 +58,20 @@
 \bigskip
 
 %------ Contenido -------- %
+\section*{Ejercicios.}
+
+\textbf{Mapas de Karnaugh para el Ejercicio 1.}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{karnaugh1.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Karnaugh2.png}
+\end{figure}
+
+
 \section*{Preguntas.}
 
 \begin{enumerate}
@@ -104,7 +118,7 @@
     El sesgo de reloj se origina principalmente por diferencias en el retraso de la red de distribución del reloj. Entre sus principales causas se incluyen:
 
     \begin{itemize}
-    \item \textbf{Diferencias en la longitud de las interconexiones:}\\
+    \item \textbf{Diferencias en Y = 2025- 1971 = la longitud de las interconexiones:}\\
       Si las rutas de entrega del reloj a registros secuenciales tienen longitudes distintas, la señal llegará en momentos diferentes.
       
     \item \textbf{Variaciones en los retardos de interconexión:}\\
@@ -117,7 +131,7 @@
       Variaciones en la temperatura, diferencias en los procesos de fabricación e imperfecciones en los materiales pueden afectar la sincronización del reloj.
     \end{itemize}
     
-    El sesgo de reloj influye directamente en la frecuencia máxima a la que puede operar un sistema. Un alto desfase puede reducir el margen de tiempo disponible para la propagación de datos entre registros, limitando la frecuencia de operación. Si el sesgo de reloj no se gestiona adecuadamente, puede llevar a fallos de temporización y errores en la ejecución del sistema digital.\\
+    El sesgo de reloj influye directamente en la frecuencia máxima a la que puede operar un sistema. Un alto desfase puede reducir el margen de tiempo disponible para la propagación de datos entre registros, limitando la frecuencia de operación. Si el sesgo de reloj no se gestiona adecuadamente, puede llevar a fallos de temporización y errores en la ejecución del sistema digital.
     
     Para mitigar este efecto, se emplean técnicas como el \textbf{clock balancing} \textit{(equilibrio del reloj)}, el diseño simétrico de rutas de reloj y el uso de buffers para compensar diferencias de propagación.
     
@@ -127,6 +141,53 @@
     \bigskip
     % -- Respuesta -- %
 
+    Un \textbf{Circuito Secuencial Tolerante a Fallos} es un tipo de circuito digital diseñado específicamente para seguir funcionando correctamente incluso cuando ocurren errores o fallas en alguno de sus componentes. En como un sistema que puede \textit{sobrevivir} a los problemas y continuar realizando sus tareas sin interrupcion graves.\\
+    Existen varias técnicas para lograr la tolerancia a fallos en circuitos secuenciales, algunas de las más comunes son:
+
+    \begin{itemize}
+    \item \textbf{Redundancia de Hardware:}\\
+      Esta técnica implica duplicar o triplicar los componentes críticos del circuito. Si un componente falla, los otros pueden tomar el control y mantener el sistema en funcionamiento.
+      
+    \item \textbf{Detección y Corrección de Errores:}\\
+      Se utilizan códigos especiales y circuitos adicionales para detectar errores en los datos y corregirlos automáticamente. Esto asegura que la información procesada por el circuito sea precisa y confiable.
+      
+    \item \textbf{Reconfiguración Dinámica:}\\
+      En sistemas más avanzados, el circuito puede reconfigurarse automáticamente para evitar componentes defectuosos. Si se detecta una falla, el sistema puede cambiar su configuración para utilizar componentes alternativos.
+      
+    \item \textbf{Recuperación de fallos:}\\
+      Esta técnica consiste en que el sistema pueda regresar a un estado de operación estable y correcto, despues de que ocurra una falla.
+    \end{itemize}
+    
+    Estos circuitos son esenciales en una amplia gama de aplicaciones críticas, incluyendo:
+    \begin{itemize}
+    \item \textbf{Sistemas aeroespaciales:}\\
+      Aviones, satélites y naves espaciales.
+    \item \textbf{Equipos médicos:}\\
+      Dispositivos de monitoreo, máquinas de diagnóstico y sistemas de soporte vital.
+    \item \textbf{Sistemas de control industrial:}\\
+      Plantas de energía, fábricas y sistemas de transporte.
+    \item \textbf{Sistemas de telecomunicaciones:}\\
+      Redes de comunicación y equipos de transmisión.
+    \item \textbf{Sistemas informáticos críticos:}\\
+      Servidores, sistemas de almacenamiento de datos y aplicaciones financieras
+    \end{itemize}
+
+    Y sí, sí es posible implementar tolerancia a fallos tanto en el banco de registros como en el contador.
+    
+    En el caso del contador, al ser un circuito secuencial que sigue una secuencia lógica predefinida, será relativamente sencillo detectar errores si su valor se desvía del patrón esperado. Para ello podemos:
+
+    \begin{itemize}
+    \item Implementar múltiples contadores en paralelo y comparar sus resultados para detectar discrepancias.
+    \item Incorporar circuitos adicionales que validen la transición correcta entre estados.
+    \end{itemize}
+    
+    Por otro lado, el banco de registros, lo podemos hacer tolerante a fallos implementando:
+    
+    \begin{itemize}
+      \item Mantener múltiples copias de cada valor almacenado para su recuperación en caso de error.
+      \item Bits adicionales para corrección de errores.
+      \item Verificación de coherencia.
+\end{itemize}
     \bigskip
     
   \item Existen 2 tipos de maquinas de estado finito que usan Flip-Flops. ¿Cuáles son?¿En qué se diferencian?
@@ -144,6 +205,11 @@
       \item Dado que las salidas pueden cambiar en respuesta inmediata a una entrada, las máquinas de Mealy suelen reaccionar más rápido a cambios en la entrada.
       \item En su representación gráfica, las salidas se escriben en las transiciones entre estados, junto con las entradas correspondientes.
       \end{itemize}
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.1\textwidth]{imagen2.png}
+      \end{figure}
       
     \item \textbf{Máquina de Moore.}
       \begin{itemize}
@@ -152,15 +218,30 @@
       \item Generalmente requiere más estados que una máquina de Mealy equivalente, ya que cada estado debe reflejar las posibles salidas.
       \item En su representación, la salida se asocia al estado mismo, mientras que las entradas se indican en las transiciones.
       \end{itemize}
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.1\textwidth]{imagen1.png}
+      \end{figure}
     \end{enumerate}
 
     La principal diferencia radica en cómo se determinan las salidas:\\
     En una máquina de Mealy, la salida cambia inmediatamente en función de la entrada y el estado.\\
     En una máquina de Moore, la salida solo cambia cuando el estado se actualiza.\\
     Debido a estas diferencias, las máquinas de Mealy pueden ser más rápidas en respuesta, mientras que las máquinas de Moore ofrecen mayor estabilidad en las salidas, evitando cambios bruscos ante variaciones momentáneas en la entrada.
+    
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{imagen3.png}
+    \end{figure}
+    
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{imagen4.png}
+    \end{figure}
 \end{enumerate}
 
 \section*{Punto Extra.}
 Link al video para el punto extra:
-\href{}{\textit{\uline{Registro de 4 bits con Latch tipo D}}}
+\href{https://drive.google.com/file/d/1H5akXyFdoc_lS8LiLSPnFHDVVvcUcsfj/view?usp=drivesdk}{\textit{\uline{Registro de 4 bits con Latch tipo D}}}
 \end{document}

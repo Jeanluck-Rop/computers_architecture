@@ -22,7 +22,7 @@
   hidelinks % Elimina el recuadro azul
 }
 
-\newcommand{\imp}{\rightarrow}
+\renewcommand{\refname}{Referencias} 
 
 \begin{document}
 
@@ -64,27 +64,134 @@
 
 \begin{enumerate}
 \item La Arquitectura de Computadoras se dedica únicamente al estudio de las instrucciones de una computadora y su desempeño respecto a estas ¿sí, no? Argumenta tu respuesta.
-\bigskip
-  % -- Respuesta -- %
-  
-\bigskip
-
-\item ¿Los registros son dispositivos de hardware que permiten almacenar cualquier valor en binario? Argumenta tu respuesta.
   \bigskip
   % -- Respuesta -- %
   
+  De manera muy resumida sí, sin embargo la Arquitectura de Computadoras no se limita únicamente al estudio de las instrucciones y su desempeño.
+  
+  Esta abarca múltiples aspectos que determinan el diseño y funcionamiento del hardware de las computadoras. La arquitectura de los ordenadores es importante en el sentido de que determina cómo funcionará un ordenador y para qué se puede utilizar. Determina el rendimiento, el consumo de energía, el tamaño y el coste del ordenador.
+  
+  Una arquitectura de ordenador puede ser una combinación de hardware y software, o sólo una de las dos. Una arquitectura de hardware es la implementación de la lógica de un ordenador, mientras que la arquitectura de software es la implementación de la funcionalidad de un ordenador. Sin embargo, la arquitectura de software depende en gran medida de la arquitectura de hardware.
+  
+  Existen diferentes arquitecturas que afectan la funcionalidad de un ordenador y su propósito (PCs, servidores, supercomputadoras, dispositivos embebidos, etc.).
+  
+  Es por eso que, la arquitectura de computadoras no solo se dedica únicamente las instrucciones y su desempeño, sino que también abarca el diseño del hardware, la interacción con el software y el impacto en el rendimiento y funcionalidad de un sistema informático.
+  \bigskip
+  
+\item ¿Los registros son dispositivos de hardware que permiten almacenar cualquier valor en binario? Argumenta tu respuesta.
+  \bigskip
+  % -- Respuesta -- %
+
+  Sí, como lo vimos en las clases de laboratorio, con los registros podemos almacenar valores en binario \textit{(en biestables)}, pero su función principal es el almacenamiento temporal y rápido de datos para el procesamiento de la CPU.
+
+  Los registros son pequeñas unidades de almacenamiento dentro de la Unidad Central de Procesamiento (CPU). Suelen tener tamaños de 8, 16, 32, 64 o más bits, dependiendo de la arquitectura del procesador.
+
+  Se usan para almacenar datos temporales que la CPU necesita acceder rápidamente. Con ellos contenemos valores intermedios de operaciones, direcciones de memoria o instrucciones de control.
+  
+  Sin embargo aunque pueden almacenar cualquier valor binario, su capacidad es limitada en comparación con la RAM o el disco duro. Están diseñados para acceso ultrarrápido, no para almacenamiento permanente.
   \bigskip
   
 \item ¿Cuál es la diferencia entre un AMD Ryzen 5 y un Intel Core i5? ¿Qué tipo de organización de computadoras o microarquitectura tiene?
   \bigskip
   % -- Respuesta -- %
-  
+
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{| c | c | c |}
+        
+        \hline
+        
+        \textbf{Núcleos}             & 4 & 6\\ \hline
+        \textbf{Hilos}               & 8 & 12\\ \hline
+        \textbf{Frecuencia Base}     & 0.9-2.4GHz & 2.1 GHz\\ \hline
+        \textbf{Frecuencia del Bus}  & 100 MHz & 100 MHz\\ \hline
+        \textbf{Tamaño de Memoria}   & 64 & 32\\ \hline
+        \textbf{L1 Caché}            & 96K (por núcleo) & 64K (por núcleo)\\ \hline
+        \textbf{L2 Caché}            & 280K (por núcleo) & 512K (por núcleo)\\ \hline
+        \textbf{L3 Caché}            & 8 MB (compartidos) & 8 MB (compartidos)\\ \hline
+        \textbf{TDP}                 & 12-28 W & 10-25 W\\ \hline
+        \textbf{Gráficos Integrados} & Gráficos Iris Xe G7 80EU & Radeon RX Vega 7\\ \hline
+        
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  \begin{enumerate}
+  \item \textbf{Arquitectura y Especificaciones:}\\
+    Intel Core i5 (12ª gen en adelante) usa un diseño híbrido con P-Cores y E-Cores, optimizando rendimiento y eficiencia.\\
+    Ryzen 5 mantiene una arquitectura de 6 núcleos y 12 hilos, con mejor gestión de latencia.\\
+    Ryzen 5 incluye mejor refrigeración de fábrica.
+
+  \item \textbf{Rendimiento y Productividad:}\\
+    Intel Core i5 sobresale en producción de contenido y rendimiento en un solo núcleo.\\
+    Ryzen 5 maneja mejor multitarea gracias a su mayor cantidad de hilos.\\
+    En gaming, el desempeño varía según optimización de software.
+    
+  \item \textbf{Consumo de Energía y Precio:}\\
+    Ryzen 5 es más eficiente energéticamente (menor consumo y temperatura).\\
+    Intel Core i5 es más caro, ya que requiere inversión en nuevas memorias y placas base.
+  \end{enumerate}
+
+  Ryzen 5 es el ideal si buscamos eficiencia, menor precio y compatibilidad con hardware anterior. Por otro lado, Intel Core i5 es mejor si buscamos rendimiento en productividad, así como mayor versatilidad con hardware reciente.
   \bigskip
   
 \item De los dos tipos de arquitecturas, RISC y CISC. ¿Cuál de las dos requiere un mayor número de instrucciones para realizar una tarea? ¿Por qué crees que así sea?
   \bigskip
   % -- Respuesta -- %
   
+  \textbf{Características CISC:}
+  \begin{itemize}
+  \item El tamaño del código es pequeño, lo que implica una baja necesidad de memoria RAM.
+  \item Las instrucciones complejas suelen necesitar más de un ciclo de reloj para ejecutar el código.
+  \item Se requieren menos instrucciones para escribir un software.
+  \item Ofrece programación más sencilla en lenguaje ensamblador.
+  \end{itemize}
+
+  \textbf{Ventajas de CISC:}
+  \begin{itemize}
+  \item Para el compilador se requiere de poco esfuerzo para traducir programas de alto nivel o lenguajes de instrucciones a lenguaje ensamblador o máquina.
+  \item El tamaño del código es corto, reduciendo los requisitos de memoria.
+  \item Almacenar las instrucciones CISC requieren de menos cantidad de memoria RAM.
+  \item Requiere de menos instrucciones configuradas para realizar la misma instrucción que la arquitectura RISC.
+  \end{itemize}
+  
+  \textbf{Desventajas de CISC:}
+  \begin{itemize}
+  \item Pueden requerir de varios ciclos de reloj para completar una instrucción de un software.
+  \item El rendimiento del equipo sufre un descenso debido a la velocidad del reloj.
+  \item Este diseño de procesadores requiere muchos más transistores que la arquitectura RISC.
+  \item Tienen un diseño mucho mayor que la arquitectura RISC, lo cual conlleva más generación de temperatura, mayor consumo y mayor requisito de espacio físico.
+  \end{itemize}
+
+  \textbf{Características RISC:}
+  \begin{itemize}
+  \item Para ejecutar una instrucción se requiere un ciclo de reloj. Cada ciclo de reloj incluye un método de obtención, decodificación y ejecución de la instrucción.
+  \item La técnica de canalización se usa en esta arquitectura para ejecutar múltiples partes o etapas de instrucciones para obtener un funcionamiento más eficiente.
+  \item Soporta un modo de direccionamiento simple y que tiene una longitud de instrucción fija para la ejecución de la canalización,
+  \item Usan instrucciones LOAD y STORE para acceder a la memoria.
+  \item Las instrucciones simples y limitadas permiten reducir los tiempos de ejecución de un proceso.
+  \end{itemize}
+  
+  \textbf{Ventajas de los procesadores RISC:}
+  \begin{itemize}
+  \item Ofrecen un mejor rendimiento gracias al menor número de instrucciones y la simplicidad de las mismas.
+  \item Requieren de menos transistores, lo cual los hace más económicos de diseñar y producir.
+  \item Permiten crear procesadores con espacio libre para añadir otros circuitos o reducir sencillamente el encapsulado.
+  Este diseño requiere de menos consumo de energía y generan menos calor.
+  \end{itemize}
+  
+  \textbf{Desventajas de los procesadores RISC:}
+  \begin{itemize}
+  \item El rendimiento del procesador puede variar dependiendo del código que se ejecuta, ya que las instrucciones posteriores que se ejecuten pueden depender de una instrucción anterior.
+  \item Actualmente la mayoría de software y compiladores hacen uso de instrucciones complejas.
+  \item Necesitan de memorias muy rápidas para almacenar diferentes cantidades de instrucciones, que requieren de una gran cantidad de memoria caché para responder a la instrucción en el menor tiempo posible.
+  \end{itemize}
+  
+  Por estos motivos, la arquitectura \textbf{RISC} \textit{(Reduced Instruction Set Computing)} es la que requiere un mayor número de instrucciones para realizar una tarea en comparación con \textbf{CISC} \textit{(Complex Instruction Set Computing)}.
+  
+  Como sus nombres nos indican, \textbf{RISC} tiene instrucciones más simples, diseñadas para ejecutarse en un solo ciclo de reloj; así cada instrucción realiza una operación muy básica, como una suma o un acceso a memoria.
+  
+  Mientras que en \textbf{CISC}, las instrucciones son más complejas, lo que en ocasiones provoca que se ejecuten varias operaciones en una sola instrucción, reduciendo la cantidad total de instrucciones necesarias para completar una tarea.
   \bigskip
 
 \item Menciona los tres factores de desempeño y de que dependen cada uno.
@@ -108,13 +215,34 @@
 \item ¿En una arquitectura CISC el periodo de una señal de reloj puede ser más grande que en una arquitectura RISC?
   \bigskip
   % -- Respuesta -- %
-  
+
+  Sí, como lo mencionamos anteriormente, la relativa sencillez de la arquitectura de los procesadores RISC conduce a ciclos de diseño más cortos cuando se desarrollan nuevas versiones, lo que posibilita siempre la aplicación de las más recientes tecnologías de semiconductores.
+
+  Por ello, los procesadores RISC no solo tienden a ofrecer una capacidad de procesamiento del sistema de 2 a 4 veces mayor, sino que los saltos de capacidad que se producen de generación en generación son mucho mayores que en los CISC.
   \bigskip
   
 \item El Intel 4004 (i4004), un CPU de 4 bits, fue el primer microprocesador en un simple chip, así como el primero disponible comercialmente y contenía 2300 transistores. Utilizando la Ley de Moore ¿Cuántos transistores se esperaría que tuviera hoy en día?
   \bigskip
   % -- Respuesta -- %
+
+  Usamos la f\'{o}rmula $F_t= I_t \times 2^{(Y/2)}:$
+  \begin{itemize}
+  \item $F_t:$ es el número de transistores esperados en el chip aplicando la Ley de Moore.
+  \item $I_t:$ transistores iniciales del micro chip.
+  \item $Y:$ años que han pasado desde la salida del transisor a la actualidada.
+  \end{itemize}
   
+  El 4004 fue lanzado el 15 de noviembre de 1971, construido con 2300 transistores.\\
+  Aplic\'{a}ndolo a las varibales tenemos:
+
+  \begin{itemize}
+  
+  \item $I_t = 2300$
+  \item $Y = 2025- 1971 = 54$
+  \item $F_t= 2300 \times 2^{(54/2)} = 2300 \times 2^{27} = 2300 \times 134,217,728 = 308,700,774,400$
+  \end{itemize}
+
+  No obstante, actualmente existe un procesador llamado \textbf{Wafer Scale Engine (WSE)} que cuenta con 1,200,000,000,000 transistores.
   \bigskip
   
 \item El Intel Core i9-9900K es un procesador de 64 bits con 8 núcleos con tecnología Hyper-Threading de Intel, la cual ejecuta 2 hilos en cada núcleo por lo que cuenta con 16 hilos de procesamiento en total. El Intel Core i9-9900K cuenta con 3052 mil millones de transistores. Comparando con tu respuesta anterior ¿Es mayor o menor a lo esperado? ¿Se cumplió la ley de Moore? Argumenta tu respuesta.
@@ -122,6 +250,56 @@
   \bigskip
   % -- Respuesta -- %
   
+  308,700,774,400 es menor a 3,052,000,000, en este caso particular no se cumpli\'{o} la Ley de Moore, porque como sabemos, en la actualidad nos hemos acercado a los l\'{i}mites f\'{i}sicos con nuestra tecnologi\'{i}a para seguir cumpliendo la Ley de Moore.
+
+  Sin embargo como mencionamos anteriormente existe el procesador \textbf{Wafer Scale Engine (WSE)} que cuenta con 1,200,000,000,000 transistores, desarrollado por Cerebras cuenta adem\'{a}s on 400,000 n\'{u}cleos; una mayor cantidad que los 308,700,774,400 transistores de Ley de Moore aplicada al procesadro Intel 4004 (i4004).
   \bigskip
 \end{enumerate}
+
+\begin{thebibliography}{9}
+
+\bibitem{ejercicio1} 
+  Isaac. \textbf{(2022, 24 de agosto)}. \textit{Arquitectura de computadoras: ¿Qué son? ¿Cómo funcionan?}. [Profesional Review]. Disponible en:
+
+  \url{https://www.profesionalreview.com/2022/10/01/arquitectura-de-computadoras/}
+  
+\bibitem{ejercicio2} 
+  Wikipedia. \textbf{(2024, 23 de diciembre)}. \textit{Datos binarios}. [Wikipedia, la Enciclopedia Libre]. Disponible en:
+
+  \url{https://es.wikipedia.org/wiki/Datos_binarios}
+
+\bibitem{ejercicio3} 
+  Pingping. \textbf{(2025, 20 de febrero)}. \textit{AMD Ryzen 5 vs Intel i5: Comparación detallada de procesadores de gama media}. [GEEKOM]. Disponible en:
+
+  \url{https://www.geekom.es/amd-ryzen-5-vs-intel-i5-comparacion-detallada/}
+
+\bibitem{ejercicio4} 
+  Salgado, G., Sánchez, A., Sánchez, R., \& Vega, I. \textbf{(s. d.)}. \textit{Arquitectura RISC vs CISC}. [Archivo PDF]. Disponible en:
+
+  \url{https://triton.astroscu.unam.mx/fruiz/introduccion/introduccion_computacion/Arquitectura\%20RISC\%20vs\%20CISC.pdf}
+
+\bibitem{ejercicio5} 
+  Falta información para esta referencia.
+
+\bibitem{ejercicio6} 
+  Falta información para esta referencia.
+
+\bibitem{ejercicio7} 
+  Falta información para esta referencia.
+
+\bibitem{ejercicio8} 
+  Falta información para esta referencia.
+
+\bibitem{ejercicio9} 
+  Wikipedia. \textbf{(2025, 23 de marzo)}. \textit{Intel 4004}. [Wikipedia, la Enciclopedia Libre]. Disponible en:
+
+  \url{https://es.wikipedia.org/wiki/Intel_4004}
+
+\bibitem{ejercicio10} 
+  Bercial, J. \textbf{(2019, 21 de agosto)}. \textit{Cerebras anuncia el procesador más grande del mundo con 400.000 núcleos y 1.2 billones de transistores para inteligencia artificial}. [GEEKNETIC]. Disponible en:
+
+  \url{https://www.geeknetic.es/Noticia/16991/Cerebras-anuncia-el-procesador-mas-grande-del-mundo-con-400000-nucleos-y-12-billones-de-transistores-para-inteligencia-artificial.html}
+
+\end{thebibliography}
+    
 \end{document}
