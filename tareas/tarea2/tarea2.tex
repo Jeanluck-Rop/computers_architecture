@@ -177,7 +177,7 @@
   \item Ofrecen un mejor rendimiento gracias al menor número de instrucciones y la simplicidad de las mismas.
   \item Requieren de menos transistores, lo cual los hace más económicos de diseñar y producir.
   \item Permiten crear procesadores con espacio libre para añadir otros circuitos o reducir sencillamente el encapsulado.
-  Este diseño requiere de menos consumo de energía y generan menos calor.
+    Este diseño requiere de menos consumo de energía y generan menos calor.
   \end{itemize}
   
   \textbf{Desventajas de los procesadores RISC:}
@@ -197,19 +197,133 @@
 \item Menciona los tres factores de desempeño y de que dependen cada uno.
   \bigskip
   % -- Respuesta -- %
-  
-  \bigskip
 
+  \begin{enumerate}[label=\arabic*)]
+  \item \textbf{Número de instrucciones (Instruction Count):}\\ 
+    Esto representa la cantidad total de instrucciones que un programa necesita ejecutar.
+    
+    Depende de:\\
+    \begin{itemize}
+    \item \textbf{Conjunto de Instrucciones (ISA - Instruction Set Architecture):} El ISA define las instrucciones básicas que una CPU puede ejecutar. Diferentes ISAs (como x86, ARM, RISC-V) tienen diferentes niveles de complejidad y eficiencia, lo que afecta la cantidad de instrucciones necesarias para realizar una tarea.
+      
+    \item \textbf{Compilador:} El compilador traduce el código fuente de un programa (escrito en un lenguaje de alto nivel como C++, Java, Python) a código de máquina (instrucciones que la CPU entiende). Un compilador eficiente puede generar un código de máquina más optimizado, reduciendo el número de instrucciones necesarias.
+      
+    \item \textbf{Código del Programa:} La forma en que se escribe el programa (los algoritmos utilizados, la eficiencia del código) también influye en el número de instrucciones que se deben ejecutar. Un programa bien escrito y optimizado requerirá menos instrucciones que uno ineficiente.
+    \end{itemize}
+    
+  \item \textbf{Ciclos Por Instrucción (CPI - Cycles Per Instruction):}\\
+    Este factor representa el número promedio de ciclos de reloj que la CPU necesita para ejecutar una instrucción.
+    
+    Depende de:\\
+    \begin{itemize}
+    \item \textbf{Arquitectura de la CPU:} La arquitectura interna de la CPU (como el pipeline, la memoria caché, la ejecución fuera de orden) afecta la eficiencia con la que se ejecutan las instrucciones. Algunas arquitecturas pueden ejecutar múltiples instrucciones en un solo ciclo, mientras que otras pueden requerir varios ciclos para una sola instrucción.
+      
+    \item \textbf{Código del Programa:} Diferentes instrucciones requieren diferentes cantidades de ciclos para ejecutarse. Por ejemplo, una operación de suma simple puede requerir solo un ciclo, mientras que una operación de multiplicación o división puede requerir varios ciclos. La mezcla de instrucciones en un programa influye en el CPI promedio.
+    \end{itemize}
+    
+  \item \textbf{Tiempo de Ciclo o Frecuencia (Clock Cycle Time or Clock Rate):}\\
+    El tiempo de ciclo es la duración de un ciclo de reloj de la CPU, y la frecuencia es el número de ciclos de reloj que la CPU ejecuta por segundo (medido en Hertz, Hz).
+    
+    Depende de:\\
+    \begin{itemize}
+    \item \textbf{Tecnología de Hardware:} La velocidad a la que los transistores de la CPU pueden conmutar (encenderse y apagarse) limita la frecuencia del reloj. Los avances en la tecnología de semiconductores permiten fabricar CPUs con frecuencias de reloj cada vez más altas.
+      
+    \item \textbf{Diseño de la CPU:} El diseño de la CPU (como la longitud del pipeline, la complejidad de la lógica) también influye en la frecuencia máxima a la que puede operar de manera estable.
+      \bigskip
+    \end{itemize}
+  \end{enumerate}
+  
 \item Un programa tarda 9 millones de ciclos en una computadora cuyo ciclo dura 3 ns. ¿Cuál es el tiempo de CPU?
   \bigskip
   % -- Respuesta -- %
+
+  \[
+  T_p = N_c \times T_c
+  \]
   
+  \[
+  N_c = \text{Número de ciclos} = 9,000,000
+  \]
+  
+  \[
+  T_c = \text{Tiempo de ciclo} = 3 \text{ ns}
+  \]
+  
+  \[
+  N_c \times T_c = 9,000,000 \times 3 \text{ ns} = 27,000,000 \text{ ns}
+  \]
+  
+  \[
+  T_p = \text{Tiempo de CPU} = 27,000,000 \text{ ns}
+  \]
+  
+  Lo convertirnos a milisegundos y nos queda $\frac{27,000,000}{1,000,000} = 27 ms$
+  
+  \begin{center}
+    \(\therefore\) \text{Un programa tarda 9 millones de ciclos en una computadora cuyo ciclo dura 3 ns.}\\
+    \text{Su tiempo de CPU es de 27 milisegundos.}
+  \end{center}
   \bigskip
   
 \item Un programa tarda 14 millones de ciclos en una máquina a 2.4 GHz. ¿Cuál es el tiempo de CPU?
   \bigskip
   % -- Respuesta -- %
+
+  Para calcular la duración de un solo ciclo, usamos la fórmula:
+
+  \[
+  D_c = \frac{1}{F}
+  \]
   
+  En este caso, la frecuencia es 2.4 GHz, que equivale a:
+  
+  \[
+  2.4 \text{ GHz} = 2.4 \times 10^9 \text{ Hz}
+  \]
+  
+  \[
+  D_c = \text{Duración del ciclo} = \frac{1}{2.4 \times 10^9 \text{ Hz}}
+  \]
+  
+  \[
+  \frac{1}{2.4 \times 10^9 \text{ Hz}} = 0.4166 \times 10^{-9} \text{ s}
+  \]
+
+  \[
+  4.166 \times 10^{-10} \text{ s}
+  \]
+  
+  Usando la f\'{o}rmula anterior:
+  
+  
+  \[
+  T_p = N_c \times T_c
+  \]
+  
+  Ya que hay 14 millones de ciclos lo podemos expresar como:
+
+  \[
+  14 \times 10^6
+  \]
+
+  \[
+  T_p = \text{Tiempo de CPU} = (14 \times 10^6) \times (4.166 \times 10^{-10}) 
+  \]
+
+  \[
+  = 5.8324 \times 10^{-3} \text{ s}
+  \]
+
+  Que es lo mismo que:
+
+  \[
+  5.83 \text{ ms}
+  \]
+
+  \begin{center}
+    \(\therefore\) \text{Un programa tarda 14 millones de ciclos en una máquina a 2.4 GHz.}\\
+    \text{Su tiempo de CPU es de 5.83 milisegundos.}
+  \end{center}
   \bigskip
   
 \item ¿En una arquitectura CISC el periodo de una señal de reloj puede ser más grande que en una arquitectura RISC?
@@ -236,7 +350,7 @@
   Aplic\'{a}ndolo a las varibales tenemos:
 
   \begin{itemize}
-  
+    
   \item $I_t = 2300$
   \item $Y = 2025- 1971 = 54$
   \item $F_t= 2300 \times 2^{(54/2)} = 2300 \times 2^{27} = 2300 \times 134,217,728 = 308,700,774,400$
@@ -279,16 +393,34 @@
   \url{https://triton.astroscu.unam.mx/fruiz/introduccion/introduccion_computacion/Arquitectura\%20RISC\%20vs\%20CISC.pdf}
 
 \bibitem{ejercicio5} 
-  Falta información para esta referencia.
+  \begin{itemize}
+  \item Intel. \textbf{(s. f.)} \textit{Velocidad de la CPU: ¿Qué es la frecuencia de reloj de la CPU?}. [Intel]. Disponible en:
+    
+    \url{https://www.intel.la/content/www/xl/es/gaming/resources/cpu-clock-speed.html}
+    
+  \item Intel. \textbf{(s. f.)}. \textit{Cómo leer y comprender análisis de referencia de CPU - Intel}. [Intel]. Disponible en:
+    
+    \url{https://www.intel.la/content/www/xl/es/gaming/resources/read-cpu-benchmarks.html}
+    
+  \item StudySmarter. \textbf{(s. f.)}. \textit{Rendimiento de la CPU: Optimización, Benchmark}. [StudySmarter ES]. Disponible en:
+    
+    \url{https://www.studysmarter.es/resumenes/ciencias-de-la-computacion/organizacion-y-arquitectura-de-computadoras/rendimiento-de-la-cpu/}
+  \end{itemize}
 
 \bibitem{ejercicio6} 
-  Falta información para esta referencia.
+  Isaac. \textbf{(2024, 18 diciembre)}. \textit{CPU: introducción a las unidades de rendimiento y cálculos}. [ArchiTecnologia]. Disponible en:
 
+  \url{https://architecnologia.es/cpu-rendimiento-formulas-calculos}x
+  
 \bibitem{ejercicio7} 
-  Falta información para esta referencia.
+  Isaac. \textbf{(2024, 18 diciembre)}. \textit{CPU: introducción a las unidades de rendimiento y cálculos}. [ArchiTecnologia]. Disponible en:
+  
+  \url{https://architecnologia.es/cpu-rendimiento-formulas-calculos}
 
 \bibitem{ejercicio8} 
-  Falta información para esta referencia.
+  Salgado, G., Sánchez, A., Sánchez, R., \& Vega, I. \textbf{(s. d.)}. \textit{Arquitectura RISC vs CISC}. [Archivo PDF]. Disponible en:
+
+  \url{https://triton.astroscu.unam.mx/fruiz/introduccion/introduccion_computacion/Arquitectura\%20RISC\%20vs\%20CISC.pdf}
 
 \bibitem{ejercicio9} 
   Wikipedia. \textbf{(2025, 23 de marzo)}. \textit{Intel 4004}. [Wikipedia, la Enciclopedia Libre]. Disponible en:
@@ -301,5 +433,5 @@
   \url{https://www.geeknetic.es/Noticia/16991/Cerebras-anuncia-el-procesador-mas-grande-del-mundo-con-400000-nucleos-y-12-billones-de-transistores-para-inteligencia-artificial.html}
 
 \end{thebibliography}
-    
+
 \end{document}
