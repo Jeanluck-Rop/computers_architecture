@@ -23,8 +23,8 @@ beq $t1 $zero division_error #verificamos si el divisor es 0
 li $t2 0                     #cargamos a t2 un contador para el cociente
 add $t3 $t0 $zero            #cargamos el residuo inicial a t3
 li $t4 0                     #cargamos a t4 una bandera para manejar el signo del cociente
-blt $t0 $zero invalid_divid   #si el dividendo es negativo lo hacemos positivo
-blt $t1 $zero invalid_divis   #si el divisor es negativo lo hacemos positivo
+blt $t0 $zero invalid_divid  #verificamos que el dividendo no sea negativo
+blt $t1 $zero invalid_divis  #verificamos que el divisor no sea negativo
 j loop
 
 loop:
@@ -57,13 +57,13 @@ syscall
 j exit 
 
 invalid_divid:
-li $v0 4         #imprimir la cadena
+li $v0 4          #imprimir la cadena
 la $a0 invalid_dd #cargamos al registro a0 la direccion de memoria de invalid_ds
 syscall
 j exit
 
 invalid_divis:
-li $v0 4         #imprimir la cadena
+li $v0 4          #imprimir la cadena
 la $a0 invalid_ds #cargamos al registro a0 la direccion de memoria de invalid_ds
 syscall
 j exit

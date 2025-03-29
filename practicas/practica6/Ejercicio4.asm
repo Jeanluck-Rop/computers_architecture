@@ -10,7 +10,7 @@ divis: .asciiz "La division es: "       #cadena para indicar el resultado de la 
 error_div: .asciiz "[ERROR]: No se puede dividir entre 0.\n" #cadena que indica no es posible dividir entre cero
 end_line: .asciiz ".\n" #indicar final de la linea
 .text
-.globl main # lo primero a ejecutar es el main
+.globl main #lo primero a ejecutar es el main
 
 main: #eitqueta main
 li $v0 5                     #leemos el primer numero ingresado por el usuario

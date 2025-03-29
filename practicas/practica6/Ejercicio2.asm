@@ -3,7 +3,7 @@
 .data
 str: .asciiz "Imprimiendo n veces un mensaje cualquiera.\n" # cadena como la variable a imprimir n veces 
 .text
-.globl main # lo primero a ejecutar es el main
+.globl main #lo primero a ejecutar es el main
 
 main: #etiqueta main
 li $v0 5          #leemos el numero ingresado por el usuario
