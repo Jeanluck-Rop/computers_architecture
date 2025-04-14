@@ -1,0 +1,879 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings, float, xcolor}
+
+%----- Configuración del estilo del documento------%
+\usepackage{graphicx, fancyhdr, lastpage}
+\usepackage{enumitem, pifont, hyperref, ulem}
+\usepackage{colortbl, tikz}
+\usetikzlibrary{matrix,calc}
+\usepackage[left=2cm,right=2cm,top=1.8cm,bottom=2.3cm]{geometry}
+
+%------ Paquetes matemáticos básicos --------%
+\usepackage{amsmath, amssymb, amsthm}
+
+%------ Personalizar el link al video  --------%
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black, % Azul oscuro
+  urlcolor=blue!50!black,  % Azul oscuro
+  hidelinks % Elimina el recuadro azul
+}
+
+\renewcommand{\refname}{Referencias}
+
+\definecolor{mostaza}{rgb}{1,0.85,0.4}
+\definecolor{dblue}{rgb}{0.0, 0.2, 0.6}
+
+\newcommand{\ekis}{\textcolor{dblue}{\ding{55}}}
+
+% === DEFINICIONES PARA MAPAS DE KARNAUGH === %
+
+%isolated term
+%#1 - Optional. Space between node and grouping line. Default=0
+%#2 - node
+%#3 - filling color
+\newcommand{\implicantsol}[3][0]{
+  \draw[rounded corners=3pt, fill=#3, opacity=0.3] ($(#2.north west)+(135:#1)$) rectangle ($(#2.south east)+(-45:#1)$);
+}
+
+%internal group
+%#1 - Optional. Space between node and grouping line. Default=0
+%#2 - top left node
+%#3 - bottom right node
+%#4 - filling color
+\newcommand{\implicant}[4][0]{
+  \draw[rounded corners=3pt, fill=#4, opacity=0.3] ($(#2.north west)+(135:#1)$) rectangle ($(#3.south east)+(-45:#1)$);
+}
+
+%group lateral borders
+%#1 - Optional. Space between node and grouping line. Default=0
+%#2 - top left node
+%#3 - bottom right node
+%#4 - filling color
+\newcommand{\implicantcostats}[4][0]{
+  \draw[rounded corners=3pt, fill=#4, opacity=0.3] ($(rf.east |- #2.north)+(90:#1)$)-| ($(#2.east)+(0:#1)$) |- ($(rf.east |- #3.south)+(-90:#1)$);
+  \draw[rounded corners=3pt, fill=#4, opacity=0.3] ($(cf.west |- #2.north)+(90:#1)$) -| ($(#3.west)+(180:#1)$) |- ($(cf.west |- #3.south)+(-90:#1)$);
+}
+
+%group top-bottom borders
+%#1 - Optional. Space between node and grouping line. Default=0
+%#2 - top left node
+%#3 - bottom right node
+%#4 - filling color
+\newcommand{\implicantdaltbaix}[4][0]{
+  \draw[rounded corners=3pt, fill=#4, opacity=0.3] ($(cf.south -| #2.west)+(180:#1)$) |- ($(#2.south)+(-90:#1)$) -| ($(cf.south -| #3.east)+(0:#1)$);
+  \draw[rounded corners=3pt, fill=#4, opacity=0.3] ($(rf.north -| #2.west)+(180:#1)$) |- ($(#3.north)+(90:#1)$) -| ($(rf.north -| #3.east)+(0:#1)$);
+}
+
+%group corners
+%#1 - Optional. Space between node and grouping line. Default=0
+%#2 - filling color
+\newcommand{\implicantcantons}[2][0]{
+  \draw[rounded corners=3pt, opacity=.3] ($(rf.east |- 0.south)+(-90:#1)$) -| ($(0.east |- cf.south)+(0:#1)$);
+  \draw[rounded corners=3pt, opacity=.3] ($(rf.east |- 8.north)+(90:#1)$) -| ($(8.east |- rf.north)+(0:#1)$);
+  \draw[rounded corners=3pt, opacity=.3] ($(cf.west |- 2.south)+(-90:#1)$) -| ($(2.west |- cf.south)+(180:#1)$);
+  \draw[rounded corners=3pt, opacity=.3] ($(cf.west |- 10.north)+(90:#1)$) -| ($(10.west |- rf.north)+(180:#1)$);
+  \fill[rounded corners=3pt, fill=#2, opacity=.3] ($(rf.east |- 0.south)+(-90:#1)$) -|  ($(0.east |- cf.south)+(0:#1)$) [sharp corners] ($(rf.east |- 0.south)+(-90:#1)$) |-  ($(0.east |- cf.south)+(0:#1)$) ;
+  \fill[rounded corners=3pt, fill=#2, opacity=.3] ($(rf.east |- 8.north)+(90:#1)$) -| ($(8.east |- rf.north)+(0:#1)$) [sharp corners] ($(rf.east |- 8.north)+(90:#1)$) |- ($(8.east |- rf.north)+(0:#1)$) ;
+  \fill[rounded corners=3pt, fill=#2, opacity=.3] ($(cf.west |- 2.south)+(-90:#1)$) -| ($(2.west |- cf.south)+(180:#1)$) [sharp corners]($(cf.west |- 2.south)+(-90:#1)$) |- ($(2.west |- cf.south)+(180:#1)$) ;
+  \fill[rounded corners=3pt, fill=#2, opacity=.3] ($(cf.west |- 10.north)+(90:#1)$) -| ($(10.west |- rf.north)+(180:#1)$) [sharp corners] ($(cf.west |- 10.north)+(90:#1)$) |- ($(10.west |- rf.north)+(180:#1)$) ;
+}
+
+%Empty Karnaugh map 4x4
+\newenvironment{Karnaugh}%
+{
+  \begin{tikzpicture}[baseline=(current bounding box.north),scale=0.8]
+    \draw (0,0) grid (4,4);
+    \draw (0,4) -- node [pos=0.7,above right,anchor=south west] {$x_2x_3$} node [pos=0.7,below left,anchor=north east] {$x_0x_1$} ++(135:1);
+    %
+    \matrix (mapa) [matrix of nodes,
+      column sep={0.8cm,between origins},
+      row sep={0.8cm,between origins},
+      every node/.style={minimum size=0.3mm},
+      anchor=8.center,
+      ampersand replacement=\&] at (0.5,0.5)
+            {
+              \& |(c00)| 00         \& |(c01)| 01         \& |(c11)| 11         \& |(c10)| 10         \& |(cf)| \phantom{00} \\
+              |(r00)| 00             \& |(0)|  \phantom{0} \& |(1)|  \phantom{0} \& |(3)|  \phantom{0} \& |(2)|  \phantom{0} \&                     \\
+              |(r01)| 01             \& |(4)|  \phantom{0} \& |(5)|  \phantom{0} \& |(7)|  \phantom{0} \& |(6)|  \phantom{0} \&                     \\
+              |(r11)| 11             \& |(12)| \phantom{0} \& |(13)| \phantom{0} \& |(15)| \phantom{0} \& |(14)| \phantom{0} \&                     \\
+              |(r10)| 10             \& |(8)|  \phantom{0} \& |(9)|  \phantom{0} \& |(11)| \phantom{0} \& |(10)| \phantom{0} \&                     \\
+              |(rf) | \phantom{00}   \&                    \&                    \&                    \&                    \&                     \\
+            };
+}%
+{
+  \end{tikzpicture}
+}
+
+%Empty Karnaugh map 2x4
+\newenvironment{Karnaughvuit}%
+{
+  \begin{tikzpicture}[baseline=(current bounding box.north),scale=0.8]
+    \draw (0,0) grid (4,2);
+    \draw (0,2) -- node [pos=0.7,above right,anchor=south west] {$yz$} node [pos=0.7,below left,anchor=north east] {$x$} ++(135:1);
+    %
+    \matrix (mapa) [matrix of nodes,
+      column sep={0.8cm,between origins},
+      row sep={0.8cm,between origins},
+      every node/.style={minimum size=0.3mm},
+      anchor=4.center,
+      ampersand replacement=\&] at (0.5,0.5)
+            {
+              \& |(c00)| 00         \& |(c01)| 01         \& |(c11)| 11         \& |(c10)| 10         \& |(cf)| \phantom{00} \\
+              |(r00)| 0             \& |(0)|  \phantom{0} \& |(1)|  \phantom{0} \& |(3)|  \phantom{0} \& |(2)|  \phantom{0} \&                     \\
+              |(r01)| 1             \& |(4)|  \phantom{0} \& |(5)|  \phantom{0} \& |(7)|  \phantom{0} \& |(6)|  \phantom{0} \&                     \\
+              |(rf) | \phantom{00}  \&                    \&                    \&                    \&                    \&                     \\
+            };
+}%
+{
+  \end{tikzpicture}
+}
+
+%Empty Karnaugh map 2x2
+\newenvironment{Karnaughquatre}%
+{
+  \begin{tikzpicture}[baseline=(current bounding box.north),scale=0.8]
+    \draw (0,0) grid (2,2);
+    \draw (0,2) -- node [pos=0.7,above right,anchor=south west] {b} node [pos=0.7,below left,anchor=north east] {a} ++(135:1);
+    %
+    \matrix (mapa) [matrix of nodes,
+      column sep={0.8cm,between origins},
+      row sep={0.8cm,between origins},
+      every node/.style={minimum size=0.3mm},
+      anchor=2.center,
+      ampersand replacement=\&] at (0.5,0.5)
+            {
+              \& |(c00)| 0          \& |(c01)| 1  \\
+              |(r00)| 0 \& |(0)|  \phantom{0} \& |(1)|  \phantom{0} \\
+              |(r01)| 1 \& |(2)|  \phantom{0} \& |(3)|  \phantom{0} \\
+            };
+}%
+{
+  \end{tikzpicture}
+}
+
+%Empty Karnaugh map 4x8
+\newenvironment{KarnaughTrentaDos}%
+{
+  \begin{tikzpicture}[baseline=(current bounding box.north),scale=0.8]
+    \draw (0,0) grid (8,4); % 8 columnas, 4 filas
+    \draw (0,4) -- node [pos=0.7,above right,anchor=south west] {$x_2x_3x_4$} node [pos=0.7,below left,anchor=north east] {$x_0x_1$} ++(135:1);
+    %
+    \matrix (mapa) [matrix of nodes,
+      column sep={0.8cm,between origins},
+      row sep={0.8cm,between origins},
+      every node/.style={minimum size=0.3mm},
+      anchor=16.center,
+      ampersand replacement=\&] at (0.5,0.5)
+            {
+              \& |(c000)| 000         \& |(c001)| 001         \& |(c011)| 011         \& |(c010)| 010         \& |(c110)| 110         \& |(c111)| 111         \& |(c101)| 101         \& |(c100)| 100         \& |(cf)| \phantom{000}  \\ 
+              |(r000)| 000            \& |(0)|    \phantom{0} \& |(1)|    \phantom{0} \& |(3)|    \phantom{0} \& |(2)|    \phantom{0} \& |(6)|    \phantom{0} \& |(7)|    \phantom{0} \& |(5)|    \phantom{0} \& |(4)|  \phantom{0} \& \\
+              |(r001)| 001            \& |(8)|    \phantom{0} \& |(9)|    \phantom{0} \& |(11)|   \phantom{0} \& |(10)|   \phantom{0} \& |(14)|   \phantom{0} \& |(15)|   \phantom{0} \& |(13)|   \phantom{0} \& |(12)| \phantom{0} \& \\
+              |(r011)| 011            \& |(24)|   \phantom{0} \& |(25)|   \phantom{0} \& |(27)|   \phantom{0} \& |(26)|   \phantom{0} \& |(30)|   \phantom{0} \& |(31)|   \phantom{0} \& |(29)|   \phantom{0} \& |(28)| \phantom{0} \& \\
+              |(r010)| 010            \& |(16)|   \phantom{0} \& |(17)|   \phantom{0} \& |(19)|   \phantom{0} \& |(18)|   \phantom{0} \& |(22)|   \phantom{0} \& |(23)|   \phantom{0} \& |(21)|   \phantom{0} \& |(20)| \phantom{0} \& \\
+              |(rf)| \phantom{000}    \&   \&   \&   \&   \&   \&   \&   \&   \& \\
+            };
+}%
+{
+  \end{tikzpicture}
+}
+
+%Defines 8 or 16 values (0,1,X)
+\newcommand{\contingut}[1]{%
+  \foreach \x [count=\xi from 0]  in {#1}
+  \path (\xi) node {\x};
+}
+
+%Places 1 in listed positions
+\newcommand{\minterms}[1]{%
+  \foreach \x in {#1}
+  \path (\x) node {1};
+}
+
+%Places 0 in listed positions
+\newcommand{\maxterms}[1]{%
+  \foreach \x in {#1}
+  \path (\x) node {0};
+}
+
+%Places X in listed positions
+\newcommand{\indeterminats}[1]{%
+  \foreach \x in {#1}
+  \path (\x) node {X};
+}
+
+\begin{document}
+
+%------ Encabezado -------- %
+\bigskip
+\hrule height 0.1pt
+\bigskip
+
+\begin{center}
+  \begin{minipage}{3cm}
+    \begin{center}
+      \includegraphics[height=3.4cm]{../unam_logo.png}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}{10cm}
+    \begin{center}
+      \textbf{\Large Universidad Nacional Autónoma de México}\\[0.2cm]
+      \textbf{\large Facultad de Ciencias}\\[0.2cm]
+      \textbf{Organización y Arquitectura de Computadoras 2025-2}\\[0.4cm]
+      \textbf{\Large Tarea 03}\\[0.1cm]
+      \textbf{Docentes:}\\
+      José Galaviz \hspace{1em} Ricardo Pérez \hspace{1em} Ximena Lezama\\[0.3cm]
+      \textbf{Autores:}\\
+      Fernanda Ramírez Juárez \quad Ianluck Rojo Peña\\[0.2cm]
+      \textbf{No. de cuenta:}\\
+      321204747 \quad 118005762\\[0.2cm]
+      \textbf{Fecha de entrega:} Viernes 11 de abril de 2025
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}{3cm}
+    \begin{center}
+      \includegraphics[height=3.4cm]{../fc_logo.png}
+    \end{center}
+  \end{minipage}
+\end{center}
+
+\bigskip
+\hrule height 0.1pt
+\bigskip
+
+%------ Contenido -------- %
+\section*{Preguntas.}
+
+\begin{enumerate}[label=\arabic*.]
+\item Demuestra que $x \cdot (y \cdot z) = (x \cdot y) \cdot z$\\
+  % -- Respuesta -- %
+  \textbf{Dem.} Demostracion por tabla de verdad:
+  
+  \begin{center}
+    \begin{tabular}{| c | c | c | c | c | c | c |}
+      \hline
+      \textbf{$x$} & \textbf{$y$} & \textbf{$z$} & \textbf{$y \cdot z$} & \textbf{$x \cdot (y \cdot z)$} & \textbf{$x \cdot y$} & \textbf{$(x \cdot y) \cdot z$} \\
+      \hline
+      0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 
+      0 & 1 & 1 & 1 & 0 & 0 & 0 \\
+      1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+      1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+      1 & 1 & 0 & 0 & 0 & 1 & 0 \\
+      1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  Como las columnas $x \cdot (y \cdot z)$ y $(x \cdot y) \cdot z$ son idénticas para todas las combinaciones posibles de $x$, $y$, $z$, queda demostrada la igualdad.
+  \bigskip
+  
+\item Demuestra si la siguiente igualdad es válida $x(\overline{x} + y) = xy$\\
+  % -- Respuesta -- %
+  \textbf{Dem.}
+
+  Aplicamos la propiedad de distributividad:
+  \[
+  x(\overline{x} + y) = x\overline{x} + xy
+  \]
+
+  Por el complemento, tenemos que $x\overline{x} = 0$, as\'{i}:
+  \[
+  x\overline{x} + xy = 0 + xy
+  \]
+
+  Y por \'{u}ltimo por Identidad $0 + xy = xy + 0 = xy$:
+  \[
+  0 + xy = xy
+  \]
+
+  Por lo tanto se cumple la igualdad.
+
+  Alternativamente con la tabla de verdad:
+  \begin{center}
+    \begin{tabular}{| c | c | c | c | c | c |}
+      \hline
+      \textbf{$x$} & \textbf{$y$} & \textbf{$\overline{x}$} & \textbf{$\overline{x} + y$} & \textbf{$x (\overline{x} + y)$} & \textbf{$xy$} \\
+      \hline
+      0 & 0 & 1 & 1 & 0 & 0 \\
+      0 & 1 & 1 & 1 & 0 & 0 \\ 
+      1 & 0 & 0 & 0 & 0 & 0 \\
+      1 & 1 & 0 & 1 & 1 & 1 \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  Las columnas $x(\overline{x} + y)$ y $xy$ son iguales, confirmando la igualdad.
+  \bigskip
+  
+\item Demuestra si la siguiente igualdad es válida $(x + y)(\overline{x} + z)(y + z) = (x + y)(\overline{x} + z)$ \\
+  % -- Respuesta -- %
+  \textbf{Dem.}
+  
+  Tomemos el lado izquierdo $(x + y)(\overline{x} + z)(y + z)$ y desarrollemos el producto de los dos primeros t\'{e}rminos $(x + y)(\overline{x} + z)$:
+  \[
+  (x + y)(\overline{x} + z) = x\overline{x} + xz + y\overline{x} + yz
+  \]
+
+  Sabemos que por propiedad del complemento $x\overline{x} = 0$:
+  \[
+  x\overline{x} + xz + y\overline{x} + yz = 0 xz + y\overline{x} + yz = xz + \overline{x}y + yz
+  \]
+
+  Es decir:
+  \[
+  (x + y)(\overline{x} + z) = xz + \overline{x}y + yz
+  \]
+  
+  Retomando en el lado izquierdo:
+  \[
+  (x + y)(\overline{x} + z)(y + z) = (xz + \overline{x}y + yz)(y + z)
+  \]
+
+  Desarrollando el producto:
+  \begin{align*}
+    (xz + y\overline{x} + yz)(y + z) &= xzy + y\overline{x}y + yzy + xzz + y\overline{x}z + yzz \\
+    &= xyz + \overline{x}yy + yyz + xzz + \overline{x}yz + yzz \quad \text{Conmutatividad}
+  \end{align*}
+
+  Aplicando idempotencia, $yy = y$ y $zz = z$:
+  \[
+  xyz + \overline{x}yy + yyz + xzz + \overline{x}yz + yzz = xyz + \overline{x}y + yz + xz + \overline{x}yz + yz
+  \]
+
+  De igual forma por idempotencia sobre $yz + yz = yz$
+  \begin{align*}
+    xyz + \overline{x}y + yz + xz + \overline{x}yz + yz &= xyz + \overline{x}y + xz + \overline{x}yz + yz + yz \quad \text{Conmutatividad}  \\
+    &= xyz + \overline{x}y + xz + \overline{x}yz + yz
+  \end{align*}
+  
+  Observemos que $xyz + \overline{x}yz = yz(x + \overline{x}) = yz(1) = yz$
+  \begin{align*}
+    xyz + \overline{x}y + xz + \overline{x}yz + yz &= xyz + \overline{x}yz + \overline{x}y + xz + yz \hspace{1.85cm} \text{Conmutatividad} \\
+    &= \overline{x}y + xz + yz + yz = \overline{x}y + xz + yz \quad \text{Idempotencia}
+  \end{align*}
+
+  Ahora, notemos que $\overline{x}y + xz + yz = xz + \overline{x}y + yz$, que es lo que obtuvimos al desarrollar el producto $(x + y)(\overline{x} + z)$, es decir:
+  \[
+  \overline{x}y + xz + yz = xz + \overline{x}y + yz = (x + y)(\overline{x} + z)
+  \]
+
+  Por lo que podemos concluir que el factor $(y + z)$ est\'{a} de m\'{a}s, y de esta forma la igualdad es v\'{a}lida.
+
+  \[
+  \therefore \; \text{ Se cumple que } (x + y)(\overline{x} + z)(y + z) = (x + y)(\overline{x} + z)
+  \]
+  \bigskip
+  
+\item Demuestra si la siguiente igualdad es válida $\overline{x \cdot y} = \overline{x} \cdot \overline{y}$\\
+  % -- Respuesta -- %
+  \textbf{Dem.} Demostracion por contra-ejemplo:
+  
+  Sea $x = 1$ y $y = 1$, sustituyendo en la igualdad:
+  \[
+  \overline{x \cdot y} = \overline{x} \cdot \overline{y}
+  \]
+  \[
+  \overline{1 \cdot 0} = \overline{1} \cdot \overline{0}
+  \]
+
+  Sabemos que $1 \cdot 0 = 0 \cdot 1 = 0$, y $\overline{1} = 0$, $\overline{0} = 1$:
+  \[
+  \overline{0} = 0 \cdot 1
+  \]
+  \[
+  1 = 0 \text{\quad \; \large{!!!}}
+  \]
+
+  Pero esto es una contradicci\'{o}n, pues $1 \neq 0$. Por lo que la igualdad no es válida.
+  \[
+  \therefore \quad \overline{x \cdot y} \neq \overline{x} \cdot \overline{y}
+  \]
+  
+  \bigskip
+  
+\item Verifica la siguiente igualdad usando los postulados de Huntington.
+  \[
+  F(x, y, z) = x + x(\overline{x} + y) + \overline{x}y = x + y
+  \]
+  % -- Respuesta -- %
+  Resolvemos la igualdad en base a los postulados de Huntington tomados como referencia del archivo pdf de las notas de clase \href{https://drive.google.com/file/d/1BdCwuwFcSar5W5nPxA98FVNfTxZfd6yg/view}{\textit{\uline{Lógica digital y diseño de circuitos digitales}}}.\\
+
+  Aplicamos la distributividad para $x(\overline{x}\: +\: y) = x\overline{x}\: +\: xy$:
+  \begin{align*}
+    F(x, y, z) = x + x(\overline{x} + y) + \overline{x}y =  x + x\overline{x} + xy + \overline{x}y
+  \end{align*}
+
+  Notemos que, por el postulado Complemento, $x\overline{x} = 0$:
+  \begin{align*}
+    F(x, y, z) = x + x\overline{x} + xy + \overline{x}y = x + 0 + xy + \overline{x}y
+  \end{align*}
+
+  Y por Identidad $x + 0 = 0 + x = x$:
+  \begin{align*}
+    F(x, y, z) =  x + 0 + xy + \overline{x}y = x + xy + \overline{x}y
+  \end{align*}
+
+  Ahora, podemos factorizar $y$ de $(xy + \overline{x}y) = y(x + \overline{x})$:
+  \begin{align*}
+    F(x, y, z) = x + xy + \overline{x}y = x + y(x + \overline{x})
+  \end{align*}
+
+  Reexpresamos $x + \overline{x} = 1$ por el postulado del Complemento:
+  \begin{align*}
+    F(x, y, z) = x + y(x + \overline{x}) = x + y(1) = x + y \cdot 1
+  \end{align*}
+
+  Simplificamos $y \cdot 1 = y$ por el postulado de Identidad:
+  \begin{align*}
+    F(x, y, z) =  x + y(1) = x + y \cdot 1 = x + y
+  \end{align*}
+
+  De este modo qued\'{o} demostrado que $x + x(\overline{x} + y) + \overline{x}y = x + y$
+  \[
+  \therefore \; F(x, y, z) = x + x(\overline{x} + y) + \overline{x}y = x + y
+  \]
+  \bigskip
+  
+\item Obtén los mint\'{e}rminos y reduce la siguiente función.
+  \[
+  F(x, y, z) = \overline{x} \cdot \overline{y} \cdot \overline{z} \cdot x + \overline{z} \cdot x + z \cdot x + x \cdot \overline{y} + \overline{z}
+  \]
+  % -- Respuesta -- %
+  Antes de obtener los mint\'{e}rminos y reducir la funci\'{o}n dada, primero la simplificamos en base, de nuevo, a las notas de clase \href{https://drive.google.com/file/d/1BdCwuwFcSar5W5nPxA98FVNfTxZfd6yg/view}{\textit{\uline{Lógica digital y diseño de circuitos digitales}}}.\\
+
+  \begin{enumerate}[label=\arabic*)]
+  \item Simplificamos la funci\'{o}n.
+
+    Notemos que por Conmutatividad $\overline{x} \cdot \overline{y} \cdot \overline{z} \cdot x = \overline{x} \cdot x \cdot \overline{y} \cdot \overline{z}$
+    
+    Por Complemento $\overline{x} \cdot x = 0$, as\'{i} $\overline{x} \cdot x \cdot \overline{y} \cdot \overline{z} = 0 \cdot \overline{y} \cdot \overline{z}$
+    
+    Y por el \textbf{Teorema 2} (Aniquilaci\'{o}n) $0 \cdot \overline{y} \cdot \overline{z} = 0$:
+    \begin{align*}
+      F(x, y, z) &= \overline{x} \cdot \overline{y} \cdot \overline{z} \cdot x + \overline{z} \cdot x + z \cdot x + x \cdot \overline{y} + \overline{z}\\
+      &= \overline{x} \cdot x \cdot \overline{y} \cdot \overline{z} + \overline{z} \cdot x + z \cdot x + x \cdot \overline{y} + \overline{z}\\
+      &= 0 \cdot \overline{y} \cdot \overline{z} + \overline{z} \cdot x + z \cdot x + x \cdot \overline{y} + \overline{z}\\
+      &= 0 + \overline{z} \cdot x + z \cdot x + x \cdot \overline{y} + \overline{z}\\
+      &= \overline{z} \cdot x + z \cdot x + x \cdot \overline{y} + \overline{z} \quad \text{Identidad: } 0 + x = x
+    \end{align*}
+
+    Factorizamos los términos comunes, observando que $\overline{z} \cdot x + z \cdot x = x(\overline{z} + z)$
+
+    Recordando que por el Complemento $\overline{z} + z = 1$, as\'{i} $x(\overline{z} + z) = x(1) = x$:
+    \begin{align*}
+      F(x, y, z) &= \overline{z} \cdot x + z \cdot x + x \cdot \overline{y} + \overline{z}\\
+      &= x(\overline{z} + z) + x \cdot \overline{y} + \overline{z}\\
+      &= x(1) + x \cdot \overline{y} + \overline{z}\\
+      &= x + x \cdot \overline{y} + \overline{z}
+    \end{align*}
+
+    Por \'{u}ltimo aplicamos el \textbf{Teorema 3} (Absorci\'{o}n) $x + x \cdot y = x$:
+    \begin{align*}
+      F(x, y, z) &=  x + x \cdot \overline{y} + \overline{z}\\
+      &= x + \overline{z}
+    \end{align*}
+
+    Por lo que la funci\'{o}n simplificada es $F(x, y, z) = x + \overline{z}$.
+
+  \item Obtenemos los mint\'{e}rminos.
+    
+    Construimos la tabla de verdad para la función $F(x, y, z) = x + \overline{z}$:
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $x$ & $y$ & $z$ & $\overline{z}$ & $F(x, y, z)$ \\
+        \hline
+        0 & 0 & 0 & 1 & 1 \\
+        0 & 0 & 1 & 0 & 0 \\
+        0 & 1 & 0 & 1 & 1 \\
+        0 & 1 & 1 & 0 & 0 \\
+        1 & 0 & 0 & 1 & 1 \\
+        1 & 0 & 1 & 0 & 1 \\
+        1 & 1 & 0 & 1 & 1 \\
+        1 & 1 & 1 & 0 & 1 \\
+        \hline
+      \end{tabular}
+    \end{center}
+    
+    Los mint\'{e}rminos donde $F = 1$ corresponden a las siguientes combinaciones:
+    \[
+    m_0, m_2, m_4, m_5, m_6, m_7
+    \]
+    
+    Y de este modo, la forma canónica es:
+    \[
+    F(x, y, z) = m_0, m_2, m_4, m_5, m_6, m_7 = \sum m(0, 2, 4, 5, 6, 7)
+    \]
+
+  \end{enumerate}
+  
+  \[
+  \therefore \text{ La funci\'{o}n reducida es } F(x, y, z) = x + \overline{z}
+  \]
+  \[
+  \quad \;   \text{ Los mint\'{e}rminos son } F(x, y, z) = m_0, m_2, m_4, m_5, m_6, m_7 = \sum m(0, 2, 4, 5, 6, 7)
+  \]
+  
+  \newpage
+  
+\item Simplifica la siguiente función usando su tabla de verdad asociada y mapas de Karnaugh.
+  \[
+  F(x, y, z) = \overline{xyz} + \overline{xy}z + \overline{x}y\overline{z} + x\overline{yz} + \overline{x}yz + x\overline{y}z + xyz
+  \]
+  % -- Respuesta -- %
+  
+  \textbf{Tabla de verdad:}
+  \[
+  \begin{array}{| c | c | c | c |}
+    \hline
+    x & y & z & xyz \\
+    \hline
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 1 \\
+    0 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 \\
+    1 & 0 & 1 & 1 \\
+    1 & 1 & 0 & 0 \\
+    1 & 1 & 1 & 1 \\
+    \hline
+  \end{array}
+  \]
+
+  \textbf{Mapa de Karnaugh:}
+  \begin{Karnaughvuit}
+    \contingut{1,1,1,1,1,1,1,0}
+
+    \implicant{0}{5}{orange}     % 0,1,4,5
+    \implicant{1}{7}{purple}     % 1,3,5,7
+    \implicant{0}{2}{blue}       % 0,1,2,3
+  \end{Karnaughvuit}
+  
+  \textbf{Función simplificada:} $\overline{x} + \overline{y} + z$
+  
+  \bigskip
+  
+\item Reduce la siguiente función y da su maxitérminos.
+  \[
+  F(x, y, z) = (x + \overline{x}z) \cdot (\overline{y} + \overline{z}) \cdot z
+  \]
+  % -- Respuesta -- %
+
+  Aplicamos la ley de absorción y la ley distributiva:
+  \[
+  x + \overline{x}z = (x + \overline{x})(x + z) = 1 \cdot (x + z) = x + z
+  \]
+  
+  Sustituimos:
+  \[
+  F(x, y, z) = (x + z)(\overline{y} + \overline{z})z
+  \]
+  
+  Aplicamos la ley distributiva entre los tres factores:
+  \[
+  F(x, y, z) = [(x + z)(\overline{y} + \overline{z})]z
+  \]
+
+  Distribuimos los primeros términos:
+  \[
+  (x + z)(\overline{y} + \overline{z}) = x\overline{y} + x\overline{z} + z\overline{y} + z\overline{z}
+  \]
+
+  Pero $z\overline{z} = 0$, entonces obtenemos: $x\overline{y} + x\overline{z} + z\overline{y}$
+
+  Multiplicamos por $z$:
+  \[
+  F(x, y, z) = (x\overline{y} + x\overline{z} + z\overline{y})z = x\overline{y}z + x\overline{z}z + z\overline{y}z
+  \]
+  
+  Como ya sabemos $x\overline{z}z = 0$ y $z\overline{y}z = z\overline{y}$:
+  \[
+  F(x, y, z) = x\overline{y}z + z\overline{y}
+  \]
+
+  Factorizando:
+  \[
+  F(x, y, z) = z\overline{y}(x + 1) = z\overline{y}
+  \]
+
+  As\'{i} tenemos la \textbf{Función reducida:} $z\overline{y}$
+
+  \textbf{Escribimos cada maxitérmino:}
+  \[
+  \begin{array}{cccc}
+  M_0 & 000 & (x + y + z) \\
+  M_1 & 001 & (x + y + \overline{z}) \\
+  M_2 & 010 & (x + \overline{y} + z) \\
+  M_3 & 011 & (x + \overline{y} + \overline{z}) \\
+  M_4 & 100 & (\overline{x} + y + z) \\
+  M_6 & 110 & (\overline{x} + \overline{y} + z) \\
+  M_7 & 111 & (\overline{x} + \overline{y} + \overline{z}) \\
+  \end{array}
+  \]
+
+  \[
+  F(x, y, z) = \prod(M_0, M_1, M_2, M_3, M_4, M_6, M_7)
+  \]
+  
+  \[
+  F(x, y, z) = (x + y + z)(x + \overline{y} + z)(x + \overline{y} + \overline{z})(\overline{x} + y + z)(\overline{x} + \overline{y} + z)(\overline{x} + \overline{y} + \overline{z})
+  \]
+  
+  \[
+  \boxed{F(x, y, z) = (000)(010)(011)(100)(110)(111)}
+  \]
+  
+  \bigskip
+  
+\item Utilizando Mapas de Karnaugh simplifica la función.
+  \[
+  \centering
+  F(x_0, x_1, x_2, x_3) = \overline{x_0x_1x_2x_3} + \overline{x_0x_1x_2}x_3 + \overline{x_0x_1}x_2x_3 + x_0\overline{x_1}x_2x_3 + x_0x_1\overline{x_2x_3} + \overline{x_0}x_1\overline{x_2x_3} + x_0x_1x_2x_3
+  \]
+  % -- Respuesta -- %
+  
+  \textbf{Mapa de Karnaugh:}
+  \begin{Karnaugh}
+    % Contenido del mapa: (1 = celda activa, 0 = celda inactiva)
+    % Orden de índices: 0, 1, 3, 2, 4, 5, 7, 6, 12, 13, 15, 14, 8, 9, 11, 10
+    \contingut{1,1,1,0,1,0,0,0,1,0,1,0,0,0,0,0}
+
+    \implicant{0}{1}{red}       % Agrupa celdas 0 y 1
+    \implicant{1}{3}{cyan}      % Agrupa celdas 1 y 3
+    \implicant{4}{12}{violet}   % Agrupa celdas 4 y 12
+    \implicant{15}{11}{pink}     % Agrupa celdas 12 y 15 (index 10 = celda 15 en orden canónico)
+  \end{Karnaugh}
+  
+  \[
+  \therefore \text{La \textbf{Funci\'{o}n simplificada} es:}
+  \]
+  \[
+  F(x_0, x_1, x_2, x_3) = x_1\overline{x_2x_3} + \overline{x_0x_1x_2} + \overline{x_0x_1}x_2x_3 + x_0x_2x_3
+  \]
+  
+  \bigskip
+  
+\item Para realizar una Mapa de Karnaugh con más de 5 variables se mencionó que existe más de una forma de representarlo.
+  
+  Investiga ambos métodos y utiliza el que más se te acomode para reducir la siguiente función.
+  \[
+  F(x_0, x_1, x_2, x_3, x_4) = \overline{x_0x_1x_2x_3x_4}\; +\; \overline{x_0x_1x_2}x_3\overline{x_4}\; +\; \overline{x_0x_1}x_2x_3\overline{x_4}\; +\; x_0\overline{x_1}x_2x_3x_4\; +
+  \]
+  \[
+  x_0x_1\overline{x_2x_3}x_4\; +\; \overline{x_0}x_1\overline{x_2x_3x_4}\; +\; x_0x_1x_2x_3x_4
+  \]
+  % -- Respuesta -- %
+
+  \textbf{Mapa de Karnaugh:}
+  \begin{KarnaughTrentaDos}
+    % Contenido del mapa: (1 = celda activa, 0 = celda inactiva)
+    % Orden de índices: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+    \contingut{1,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1}
+    %\contingut{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31}
+    %\contingut{
+    %  0,  1,  3,  2,  6,  7,  5,  4,
+    %  8,  9, 11, 10, 14, 15, 13, 12,
+    % 24, 25, 27, 26, 30, 31, 29, 28,
+    % 16, 17, 19, 18, 22, 23, 21, 20,
+    %}
+    \implicant{0}{0}{red}
+    \hspace{-0.1cm}\implicant{2}{2}{red}
+    \hspace{0.1cm}\implicant{9}{25}{green}    
+    \implicant{2}{6}{cyan}
+    \implicant{31}{23}{violet}
+  \end{KarnaughTrentaDos}
+  
+  \[
+  \therefore \text{La \textbf{Funci\'{o}n simplificada} es:}
+  \]
+  \[
+  F(x_0, x_1, x_2, x_3) = x_1\overline{x_2x_3} + \overline{x_0x_1x_2} + \overline{x_0x_1}x_2x_3 + x_0x_2x_3
+  \]
+  
+  \bigskip
+  
+\item Utilizando el algoritmo de Quine–McCluskey realiza la siguiente reducción.
+  \[
+  F(x_0, x_1, x_2, x_3, x_4) = \overline{x_0x_1x_2x_3x_4}\; +\; \overline{x_0x_1x_2}x_3\overline{x_4}\; +\; \overline{x_0}x_1x_2x_3\overline{x_4}\; +\; \overline{x_0}x_1\overline{x_2}x_3\overline{x_4}\; +
+  \]
+  \[
+  x_0\overline{x_1}x_2x_3x_4\; +\; x_0x_1\overline{x_2x_3}x_4\; +\; \overline{x_0}x_1\overline{x_2x_3}x_4\; +\; x_0x_1x_2\overline{x_3}x_4\; +\; x_0x_1x_2x_3x_4
+  \]
+  % -- Respuesta -- %
+
+  \begin{enumerate}[label=\arabic*)]
+  \item Paso 1: Hacer la tabla y organizar según su índice.
+    \[
+    \begin{array}{|c|c|c|}
+      \hline
+      \text{Número} & x_0\,x_1\,x_2\,x_3\,x_4 & \text{Índice} \\
+      \hline
+      0  & 00000 & 0 \\
+      2  & 00010 & 1 \\
+      9  & 01001 & 2 \\
+      10 & 01010 & 2 \\
+      14 & 01110 & 3 \\
+      25 & 11001 & 3 \\
+      23 & 10111 & 4 \\
+      29 & 11101 & 4 \\
+      31 & 11111 & 5 \\
+      \hline
+    \end{array}
+    \]
+    
+  \item Paso 2: Identificar cuáles cambian en un solo bit.
+    \[
+    \begin{array}{| c | c | c | c |}
+      \hline
+      \text{Combinación} & x_0\,x_1\,x_2\,x_3\,x_4 & \text{Índice} & \text{Solución} \\
+      \hline
+      0{-}2   & 000{-}0 & 0 & S_1 \\
+      2{-}10  & 0{-}010 & 1 & S_2 \\
+      9{-}25  & {-}1001 & 2 & S_3 \\
+      10{-}14 & 01{-}10 & 2 & S_4 \\
+      25{-}29 & 11{-}01 & 3 & S_5 \\
+      23{-}31 & 1{-}111 & 4 & S_6 \\
+      29{-}31 & 111{-}1 & 4 & S_7 \\
+      \hline
+    \end{array}
+    \]
+
+  \item Paso 3: Omitimos este paso ya que con los resultados que tenemos no es posible hacer la comparación porque cambian en más de un bit.
+
+  \item Hacemos la tabla para marcar lo que tenemos:
+    \begin{table}[H]
+      \begin{center}
+        \begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c |}
+          
+          \hline 
+          & 0 & 2 & 9 & 10 & 14 & 25 & 23 & 29 & 31   \\ \hline
+          $S_1$ & \cellcolor{mostaza}\ekis & \cellcolor{mostaza}\ekis & & & & & & & \\ \hline
+          $S_2$ & & \ekis & & \ekis & & & & & \\ \hline
+          $S_3$ & & & \cellcolor{mostaza}\ekis & & & \cellcolor{mostaza}\ekis & & & \\ \hline
+          $S_4$ & & & & \cellcolor{mostaza}\ekis & \cellcolor{mostaza}\ekis & & & & \\ \hline
+          $S_5$ & & & & & & \ekis & & \ekis & \\ \hline
+          $S_6$ & & & & & & & \cellcolor{mostaza}\ekis & & \cellcolor{mostaza}\ekis \\ \hline
+          $S_7$ & & & & & & & & \cellcolor{mostaza}\ekis & \cellcolor{mostaza}\ekis \\ \hline
+        \end{tabular}
+      \end{center}
+    \end{table}
+  \end{enumerate}
+  
+  Elegimos soluciones: $S_1,\; S_3,\; S_4,\; S_6,\; S_7$
+
+  \[
+  \therefore \text{La \textbf{Funci\'{o}n simplificada} es:}
+  \]
+  \[
+  F(x_0, x_1, x_2, x_3, x_4) = \overline{x_0x_1x_2x_4} + x_1\overline{x_2x_3}x_4 + \overline{x_0}x_1x_2\overline{x_4} + x_0x_2x_3x_4 + x_0x_1x_2x_4
+  \]
+  \bigskip
+  
+\item Utilizando el algoritmo de Quine–McCluskey realiza la siguiente reducción.
+  \[
+  F(x_0, x_1, x_2, x_3, x_4) = \overline{x_0x_1x_2x_3x_4}\; +\; \overline{x_0x_1x_2}x_3\overline{x_4}\; +\; \overline{x_0x_1}x_2x_3\overline{x_4}\; +\; \overline{x_0x_1}x_2x_3x_4\; +
+  \]
+  \[
+  \overline{x_0}x_1x_2x_3\overline{x_4}\; +\; \overline{x_0}x_1\overline{x_2}x_3\overline{x_4}\; +\; x_0\overline{x_1}x_2x_3x_4\; +\; x_0x_1\overline{x_2x_3}x_4\; +\; \overline{x_0}x_1\overline{x_2x_3}x_4\; +
+  \]
+  \[
+  x_0x_1x_2\overline{x_3}x_4\; +\;  x_0x_1x_2x_3x_4
+  \]
+  % -- Respuesta -- %
+
+  \begin{enumerate}[label=\arabic*)]
+  \item Paso 1: Hacer la tabla y organizar según su índice.
+    \[
+    \begin{array}{| c | c | c |}
+      \hline
+      \text{Número} & x_0\,x_1\,x_2\,x_3\,x_4 & \text{Índice} \\
+      \hline
+      0  & 00000 & 0 \\
+      2  & 00010 & 1 \\
+      6  & 00110 & 2 \\
+      9  & 01001 & 2 \\
+      10 & 01010 & 2 \\
+      7  & 00111 & 3 \\
+      14 & 01110 & 3 \\
+      25 & 11001 & 3 \\
+      23 & 10111 & 4 \\
+      29 & 11101 & 4 \\
+      31 & 11111 & 5 \\
+      \hline
+    \end{array}
+    \]
+    
+  \item Paso 2: Identificar cuáles cambian en un solo bit.
+    \[
+    \begin{array}{| c | c | c | c |}
+      \hline
+      \text{Combinación} & x_0\,x_1\,x_2\,x_3\,x_4 & \text{Índice} & \text{Solución} \\
+      \hline
+      0{-}2   & 000{-}0 & 0 & S_1 \\
+      2{-}6   & 00{-}10 & 1 & X \\
+      2{-}10  & 0{-}010 & 1 & X \\
+      6{-}7   & 0011{-} & 2 & S_2 \\
+      6{-}14  & 0{-}110 & 2 & X \\
+      9{-}25  & {-}1001 & 2 & S_3 \\
+      10{-}14 & 01{-}10 & 2 & X \\
+      7{-}23  & {-}0111 & 3 & S_4 \\
+      25{-}29 & 11{-}01 & 3 & S_5 \\
+      23{-}31 & 1{-}111 & 4 & S_6 \\
+      29{-}31 & 111{-}1 & 4 & S_7 \\
+      \hline
+    \end{array}
+    \]
+
+  \item Paso 3: Comparamos de nuevo los bits pero si el guión está en la misma posición.
+    \[
+    \begin{array}{| c | c | c | c |}
+      \hline
+      \text{Combinación} & x_0\,x_1\,x_2\,x_3\,x_4 & \text{Índice} & \text{Solución} \\
+      \hline
+      2,6{-}10,14   & 0{-}{-}10 & 1 & S_8 \\
+      2,10{-}6,14   & 0{-}{-}10 & 1 & S_8\\
+      \hline
+    \end{array}
+    \]
+
+  \item Hacemos la tabla para marcar lo que tenemos:
+    \begin{table}[H]
+      \begin{center}
+        \begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c | c |}
+          
+          \hline 
+          & 0 & 2 & 6 & 7 & 9 & 10 & 14 & 23 & 25 & 29 & 31   \\ \hline
+          $S_1$ & \cellcolor{mostaza}\ekis & \cellcolor{mostaza}\ekis & & & & & & & & & \\ \hline
+          $S_2$ & & & \ekis & \ekis & & & & & & & \\ \hline
+          $S_3$ & & & & & \cellcolor{mostaza}\ekis & & & & \cellcolor{mostaza}\ekis & & \\ \hline
+          $S_4$ & & & & \cellcolor{mostaza}\ekis & & & & \cellcolor{mostaza}\ekis & & & \\ \hline
+          $S_5$ & & & & & & & & & \ekis & \ekis & \\ \hline
+          $S_6$ & & & & & & & & \ekis & & & \ekis \\ \hline
+          $S_7$ & & & & & & & & & & \cellcolor{mostaza}\ekis & \cellcolor{mostaza}\ekis \\ \hline
+          $S_8$ & & \cellcolor{mostaza}\ekis & \cellcolor{mostaza}\ekis & & & \cellcolor{mostaza}\ekis & \cellcolor{mostaza}\ekis & & & & \\ \hline
+        \end{tabular}
+      \end{center}
+    \end{table}
+  \end{enumerate}
+  
+  Elegimos soluciones: $S_1,\; S_3,\; S_4,\; S_7,\; S_8$
+
+  \[
+  \therefore \text{La \textbf{Funci\'{o}n simplificada} es:}
+  \]
+  \[
+  F(x_0, x_1, x_2, x_3, x_4) = \overline{x_0x_1x_2x_4} + x_1\overline{x_2x_3}x_4 + \overline{x_1}x_2x_3x_4 + x_0x_1x_2x_4 + \overline{x_0}x_3\overline{x_4}
+  \]
+\end{enumerate}
+
+\begin{thebibliography}{1}
+
+\bibitem{ejercicio1} 
+  Galaviz, C. \textbf{(s. f.)}. \textit{Lógica digital y diseño de circuitos digitales}. [Facultad de Ciencias, UNAM]. PDF. Disponible en:
+
+  \url{https://drive.google.com/file/d/1BdCwuwFcSar5W5nPxA98FVNfTxZfd6yg/view}
+\end{thebibliography}
+\end{document}
