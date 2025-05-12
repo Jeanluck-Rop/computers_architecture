@@ -67,7 +67,7 @@ count_sinopsis:      .asciiz "Sinopsis: count [file] \n"
 count_argp:          .asciiz "Argumentos: file - Archivo a contar.\n"
 play_comm:           .asciiz "Comando: select.\n"
 play_info:           .asciiz "Info: Reproduce alguna de las siguientes canciones:\n"
-play_songs:          .asciiz "      | song1 | song2 | song3 |\n"
+play_songs:          .asciiz "      | song1 | song2 | |\n"
 play_sinopsis:       .asciiz "Sinopsis: play [arg] \n"
 play_args:           .asciiz "Argumentos: arg - Nombre de la cancion que se desea escuchar \n"
 palindrome_comm:     .asciiz "Comando: palindrome.\n"
@@ -117,101 +117,65 @@ song2: .asciiz "song2"
 song3: .asciiz "song3"
 playing_song: .asciiz "\nReproduciendo cancion...\n\n"
 #Notas musicales (octava 2), en Mars
-do2:    .word 36          #C2
-do_s2:  .word 37          #C#2 / Db2
-re2:    .word 38          #D2
-re_s2:  .word 39          #D#2 / Eb2
-mi2:    .word 40          #E2
-fa2:    .word 41          #F2
-fa_s2:  .word 42          #F#2 / Gb2
-sol2:   .word 43          #G2
-sol_s2: .word 44          #G#2 / Ab2
-la2:    .word 45          #A2
-la_s2:  .word 46          #A#2 / Bb2
-si2:    .word 47          #B2
+mi2:    .word 40          #Mi2
+sol2:   .word 43          #Sol2
+la2:    .word 45          #La2
 #Notas musicales (octava 3), en Mars
-do3:    .word 48          #C3
-do_s3:  .word 49          #C#3 / Db3
-re3:    .word 50          #D3
-re_s3:  .word 51          #D#3 / Eb3
-mi3:    .word 52          #E3
-fa3:    .word 53          #F3
-fa_s3:  .word 54          #F#3 / Gb3
-sol3:   .word 55          #G3
-sol_s3: .word 56          #G#3 / Ab3
-la3:    .word 57          #A3
-la_s3:  .word 58          #A#3 / Bb3
-si3:    .word 59          #B3
+do3:    .word 48          #Do3
+re3:    .word 50          #Re3
+mi3:    .word 52          #Mi3
+fa3:    .word 53          #Fa3
+fa_s3:  .word 54          #Fa#3 / SolB3
+sol3:   .word 55          #Sol3
+sol_s3: .word 56          #Sol#3 / LaB3
+la3:    .word 57          #La3
+la_s3:  .word 58          #La#3 / SiB3
+si3:    .word 59          #Si3
 #Notas musicales (octava 4, central), en Mars
-do:      .word 60         #C4
-do_s:    .word 61         #C#4/Db4
-re:      .word 62         #D4
-re_s:    .word 63         #D#4/Eb4
-mi:      .word 64         #E4
-fa:      .word 65         #F4
-fa_s:    .word 66         #F#4/Gb4
-sol:     .word 67         #G4
-sol_s:   .word 68         #G#4/Ab4
-la_note: .word 69         #A4
-la_s:    .word 70         #A#4/Bb4
-si:      .word 71         #B4
+do:      .word 60         #Do
+do_s:    .word 61         #Do# / ReB
+re:      .word 62         #Re
+re_s:    .word 63         #Re# / MiB
+mi:      .word 64         #Mi
+fa:      .word 65         #Fa
+fa_s:    .word 66         #Fa# / SolB
+sol:     .word 67         #Sol4
+sol_s:   .word 68         #Sol# / LaB
+la_note: .word 69         #La
+la_s:    .word 70         #La# /SiB
+si:      .word 71         #Si
 #Notas musicales (octava 5), en Mars
-do5:    .word 72          #C5
-do_s5:  .word 73          #C#5 / Db5
-re5:    .word 74          #D5
-re_s5:  .word 75          #D#5 / Eb5
-mi5:    .word 76          #E5
-fa5:    .word 77          #F5
-fa_s5:  .word 78          #F#5 / Gb5
-sol5:   .word 79          #G5
-sol_s5: .word 80          #G#5 / Ab5
-la5:    .word 81          #A5
-la_s5:  .word 82          #A#5 / Bb5
-si5:    .word 83          #B5
+do5:    .word 72          #Do5
+do_s5:  .word 73          #Do#5 / ReB5
+re5:    .word 74          #Re5
+re_s5:  .word 75          #Re#5 / MiB5
+mi5:    .word 76          #Mi5
+fa5:    .word 77          #Fa5
+sol5:   .word 79          #Sol5
+la5:    .word 81          #La5
+la_s5:  .word 82          #La#5 / SiB5
 #Notas musicales (octava 6), en Mars
-do6:    .word 84          #C6
-do_s6:  .word 85          #C#6 / Db6
-re6:    .word 86          #D6
-re_s6:  .word 87          #D#6 / Eb6
-mi6:    .word 88          #E6
-fa6:    .word 89          #F6
-fa_s6:  .word 90          #F#6 / Gb6
-sol6:   .word 91          #G6
-sol_s6: .word 92          #G#6 / Ab6
-la6:    .word 93          #A6
-la_s6:  .word 94          #A#6 / Bb6
-si6:    .word 95          #B6
+do6:    .word 84          #Do6
+mi6:    .word 88          #Mi6
 #Duraciones de las notas
-dot_red: .word 3000          #3 segundos
 redonda: .word 2000          #2 segundos
-dot_bl:  .word 1500          #1 1/2 segundos
-blanca:  .word 1000          #1 segundo
 dot_neg: .word 750           #3/4 segundo
 negra:   .word 500           #1/2 segundo
 dot_cor: .word 290           #3/8 segundo
 corchea: .word 250           #1/4 segundo
 min_cor: .word 190           #2/10 segundo
 #Silencios y Pausas
-min_pause:   .word 195        #195 milisegundos
-minex_pause: .word 205        #205 milisegundos
-pause:       .word 255        #255 milisegundos
-mid_pause:   .word 295        #380 milisegundos
-midex_pause: .word 305        #380 milisegundos
-dob_pause:   .word 505        #505 milisegundos
-ddb_pause:   .word 755        #505 milisegundos
-bl_pause:    .word 1005       #1005 milisegunods
-dbl_pause:   .word 1505       #1005 milisegunods
-red_pause:   .word 1505       #1005 milisegunods
-dred_pause:  .word 3005       #3005 milisegundos
+min_pause:   .word 195           #195 milisegundos
+minex_pause: .word 210           #205 milisegundos
+pause:       .word 255           #255 milisegundos
+mid_pause:   .word 295           #380 milisegundos
+midex_pause: .word 310           #380 milisegundos
+dob_pause:   .word 505           #505 milisegundos
+red_pause:   .word 1505          #1005 milisegunods
 #---   Cadenas para manejar el cierre del programa.   ---#
 exit_confirm: .asciiz "¿Estas seguro de salir del prompt?"
 exit_msg: .asciiz "Saliendo del programa...\n"
-#Cadena auxiliar
-new_line: .asciiz "\n"
-.macro exit(%z)
-li $v0 %z
-syscall
-.end_macro
+new_line: .asciiz "\n"          #Cadena auxiliar
 .text
 .globl main
 #------------------------------------------------------------------------------------------------------------#
@@ -254,7 +218,6 @@ sb $t2 0($t1)                         #concatenamos el caracter con lo demas en 
 addi $t0 $t0 1                        #avanzamos al siguiente caracter del buffer
 addi $t1 $t1 1                        #avanzamos al siguiente byte de command
 j get_command_loop
-
 #Terminamos el loop, pues ya obtuvimos la primer cadena del usuario
 end_command_loop:
 li $t2 0                       #asignamos null para terminar
@@ -264,7 +227,6 @@ li $t3 32                      #espacio en ASCII
 bne $t2 $t3 skip_args          #si no hay espacio, no hay argumentos
 addi $t0 $t0 1                 #de otro modo, saltamos el espacio
 la $t1 args                    #preparamos el apuntador para los argumentos
-
 #Obtenemos los argumentos (si los hay) del resto del buffer
 get_args_loop:
 lb $t2 0($t0)                   #cargamos el siguiente byte del buffer  
@@ -273,7 +235,6 @@ sb $t2 0($t1)                   #concatenamos el caracter con lo demas en args
 addi $t0 $t0 1                  #avanzamos al siguiente caracter del buffer
 addi $t1 $t1 1                  #avanzamos al siguiente byte de args
 j get_args_loop
-
 #Terminamos el loop, pues ya obtuvimos los argumentos
 end_args_loop:
 li $t2 0                         #asignamos null para terminar
@@ -290,24 +251,20 @@ skip_args:
 li $t2 0               #cargamos null para terminar
 la $t1 args            #cargamos el inicio de args a $t1
 sb $t2 0($t1)          #guardamos null en el inicio de args
-
 #Verificamos si el usuario ingreso solo un salto de linea o continuamos procesando el comando
 compare_commands:
 jal handle_new_line          #verificamos si el comando es '\n'
 jal check_help               #si no fue una linea vacia, comenzamos el chequeo de comandos
-
 #Manejamos el caso en el que el usuario dio enter, solo regresamos al principio del main loop
 handle_new_line:
 lb $t2 command              #cargamos el primer byte
 beqz $t2 main_loop          #si es null, no hay comando y volvemos a main_loop
 jr $ra                      #de otro modo continuamos con la ejecucion
-
 #Eliminamos los espacios al inicio de args
 trim_spaces:
 la $t0 args          #cargamos la direccion de args
 la $t1 args          #cargamos donde escribiremos args
 li $t3 32            #espacio en ASCII
-
 #Loop para quitar los espacios antes de args
 trim_spaces_loop:
 lb $t2 0($t0)                  #cargamos el byte actual
@@ -315,7 +272,6 @@ beqz $t2 end_trim              #si es null, terminamos
 bne $t2 $t3 copy_args          #si no es espacio, empezamos a copiar
 addi $t0 $t0 1                 #si es espacio, lo omitimos
 j trim_spaces_loop
-
 #Comienzamos a copiar los argumentos desde el primer caracter valido
 copy_args:
 sb $t2 0($t1)               #copiamos el caracter actual
@@ -323,15 +279,12 @@ addi $t0 $t0 1              #avanzamos en la lectura
 addi $t1 $t1 1              #avanzamos en la escritura
 lb $t2 0($t0)               #cargamos el siguiente byte
 bnez $t2 copy_args          #continuamos hasta encontrar null
-
 end_trim:
 sb $zero 0($t1)          #terminamos la cadena con null
 jr $ra                   #regresamos
-
 #Eliminamos el salto de línea ('\n') al final de command
 remove_newline:
 la $t0 buffer          #apuntamos al inicio de command
-
 #Iniciamos un loop en busca del salto de linea
 remove_newline_loop:
 lb $t1 0($t0)
@@ -340,18 +293,14 @@ li $t2 10                     #ASCII de '\n'
 beq $t1 $t2 replace_newline_comm #si encontramos '\n' lo reemplazamos por null
 addi $t0 $t0 1                #avanzamos al siguiente byte
 j remove_newline_loop
-
 replace_newline_comm:
 li $t1 0      #cargamos null
 sb $t1 0($t0) #sobrescribimos '\n' con null
-
 end_remove_newline:
 jr $ra          #regresamos a compare_commands, donde estas subrutinas fueron llamadas
-
 #Eliminamos el salto de línea ('\n') al final de args
 remove_newline_args:
 la $t0 args          #apuntamos al inicio de args
-
 remove_newline_args_loop:
 lb $t1 0($t0)                             #cargamos el byte actual
 beqz $t1 end_remove_newline_args          #si es null, llegamos al final y terminamos
@@ -359,11 +308,9 @@ li $t2 10                                 #'\n' en ASCII
 beq $t1 $t2 replace_newline_args          #si encontramos '\n' lo reemplazamos por null
 addi $t0 $t0 1                            #avanzamos al siguiente byte
 j remove_newline_args_loop
-
 replace_newline_args:
 li $t1 0               #cargamos null
 sb $t1 0($t0)          #sobrescribimos '\n' con null
-
 end_remove_newline_args:
 jr $ra          #volvemos a la subrutina llamadora
 #------------------------------------------------------------------------------------------------------------#
@@ -378,7 +325,6 @@ la $a1 help_id               #cargamos help_id en $a1
 jal strcmp                   #llamamos a strcmp con los valores (args, help_id)
 beq $v0 1 case_help          #si son iguales nos movemos a case_help
 j check_mix                  #si son diferentes continuamos al siguiente comando 
-
 #Comparamos si el comando es mix
 check_mix: 
 la $a0 command              #cargamos la cadena del usuario en $a0
@@ -386,7 +332,6 @@ la $a1 mix_id               #cargamos mix_id en $a1
 jal strcmp                  #llamamos a strcmp con los valores (args, mix_id)
 beq $v0 1 case_mix          #si son iguales nos movemos a case_mix
 j check_coin                #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es coin
 check_coin:
 la $a0 command               #cargamos la cadena del usuario en $a0
@@ -394,7 +339,6 @@ la $a1 coin_id               #cargamos coin_id en $a1
 jal strcmp                   #llamamos a strcmp con los valores (args, coin_id)
 beq $v0 1 case_coin          #si son iguales nos movemos a case_coin
 j check_song                 #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es song
 check_song:
 la $a0 command               #cargamos la cadena del usuario en $a0 
@@ -402,7 +346,6 @@ la $a1 song_id               #cargamos song_id en $a1
 jal strcmp                   #llamamos a strcmp con los valores (args, song_id)
 beq $v0 1 case_song          #si son iguales nos movemos a case_song
 j check_rev                  #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es rev
 check_rev:
 la $a0 command              #cargamos la cadena del usuario en $a0 
@@ -410,7 +353,6 @@ la $a1 rev_id               #cargamos rev_id en $a1
 jal strcmp                  #llamamos a strcmp con los valores (args, rev_id)
 beq $v0 1 case_rev          #si son iguales nos movemos a case_rev
 j check_cat                 #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es cat
 check_cat:
 la $a0 command              #cargamos la cadena del usuario en $a0 
@@ -418,7 +360,6 @@ la $a1 cat_id               #cargamos cat_id en $a1
 jal strcmp                  #llamamos a strcmp con los valores (args, cat_id)
 beq $v0 1 case_cat          #si son iguales nos movemos a check_count
 j check_count               #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es count
 check_count:
 la $a0 command                #cargamos la cadena del usuario en $a0 
@@ -426,7 +367,6 @@ la $a1 count_id               #cargamos count_id en $a1
 jal strcmp                    #llamamos a strcmp con los valores (args, count_id)
 beq $v0 1 case_count          #si son iguales nos movemos a case_exit
 j check_play                 #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es play
 check_play:
 la $a0 command               #cargamos la cadena del usuario en $a0 
@@ -434,7 +374,6 @@ la $a1 play_id               #cargamos select_id en $a1
 jal strcmp                   #llamamos a strcmp con los valores (args, play_id)
 beq $v0 1 case_play          #si son iguales nos movemos a case_play
 j check_palindrome           #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es palindrome
 check_palindrome:
 la $a0 command                     #cargamos la cadena del usuario en $a0 
@@ -442,7 +381,6 @@ la $a1 palindrome_id               #cargamos palindrome_id en $a1
 jal strcmp                         #llamamos a strcmp con los valores (args, palindrome_id)
 beq $v0 1 case_palindrome          #si son iguales nos movemos a case_palindrome
 j check_exit                       #si son diferentes continuamos al siguiente comando
-
 #Comparamos si el comando es exit
 check_exit: 
 la $a0 command                   #cargamos la cadena del usuario en $a0
@@ -454,7 +392,6 @@ j print_invalid_command          #como este es el ultimo input a comprobar, si s
 
 #------------------------------------------------------------------------------------------------------------#
                 #---   Seccion del codigo donde manejamos cada comando de la practica.   ---#               
-#------------------------------------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------------------------------------#
                                #---   Manejamos el comando 'help'   ---#                    
 #------------------------------------------------------------------------------------------------------------#
@@ -475,7 +412,6 @@ la $a1 help_id               #cargamos help_id en $a1
 jal strcmp                   #llamamos a strcmp con los valores (args, help_id)
 beq $v0 1 print_help         #si son iguales imprimimos la cadena help_help
 j is_mix                     #si son diferentes continuamos al siguiente argumento 
-
 #Comparamos si el argumento es mix
 is_mix:
 la $a0 args                 #cargamos el argumento del usuario en $a0
@@ -483,7 +419,6 @@ la $a1 mix_id               #cargamos mix_id en $a1
 jal strcmp                  #llamamos a strcmp con los valores (args, mix_id)
 beq $v0 1 print_mix         #si son iguales imprimimos la cadena help_mix
 j is_coin                   #si son diferentes continuamos al siguiente argumento
-
 #Comparamos si el argumento es coin
 is_coin:
 la $a0 args                  #cargamos la cadena del usuario en $a0
@@ -491,7 +426,6 @@ la $a1 coin_id               #cargamos coin_id en $a1
 jal strcmp                   #llamamos a strcmp con los valores (args, coin_id)
 beq $v0 1 print_coin         #si son iguales imprimimos la cadena help_coin
 j is_song                    #si son diferentes continuamos al siguiente argumento
-
 #Comparamos si el argumento es song
 is_song:
 la $a0 args                  #cargamos la cadena del usuario en $a0 
@@ -499,7 +433,6 @@ la $a1 song_id               #cargamos song_id en $a1
 jal strcmp                   #llamamos a strcmp con los valores (args, song_id)
 beq $v0 1 print_song         #si son iguales imprimimos la cadena help_song
 j is_rev                     #si son diferentes continuamos al siguiente argumento
-
 #Comparamos si el argumento es rev
 is_rev:
 la $a0 args                 #cargamos la cadena del usuario en $a0 
@@ -515,15 +448,13 @@ la $a1 cat_id               #cargamos cat_id en $a1
 jal strcmp                  #llamamos a strcmp con los valores (args, cat_id)
 beq $v0 1 print_cat         #si son iguales imprimimos la cadena help_count
 j is_count                  #si son diferentes continuamos al siguiente argumento
-
 #Comparamos si el comando es count
 is_count:
 la $a0 args                   #cargamos la cadena del usuario en $a0 
 la $a1 count_id               #cargamos count_id en $a1
 jal strcmp                    #llamamos a strcmp con los valores (args, count_id)
 beq $v0 1 print_count         #si son iguales imprimimos la cadena help_exit
-j is_play                   #si son diferentes continuamos al siguiente argumento
-
+j is_play                     #si son diferentes continuamos al siguiente argumento
 #Comparamos si el argumento es play
 is_play:
 la $a0 args                   #cargamos la cadena del usuario en $a0 
@@ -531,7 +462,6 @@ la $a1 play_id                #cargamos play_id en $a1
 jal strcmp                    #llamamos a strcmp con los valores (args, play_id)
 beq $v0 1 print_play          #si son iguales imprimimos la cadena help_play
 j is_palindrome               #si son diferentes continuamos al siguiente argumento
-
 #Comparamos si el argumento es palindrome
 is_palindrome:
 la $a0 args                        #cargamos la cadena del usuario en $a0 
@@ -539,7 +469,6 @@ la $a1 palindrome_id               #cargamos palindrome_id en $a1
 jal strcmp                         #llamamos a strcmp con los valores (args, palindrome_id)
 beq $v0 1 print_palindrome         #si son iguales imprimimos la cadena help_palindrome
 j is_exit                          #si son diferentes continuamos al siguiente argumento
-
 #Comparamos si el argumento es exit
 is_exit: 
 la $a0 args                  #cargamos la cadena del usuario en $a0
@@ -548,7 +477,6 @@ jal strcmp                   #llamamos a strcmp con los valores (args, exit_id)
 beq $v0 1 print_exit         #si son iguales imprimimos la cadena help_exit
 j print_invalid_args         #como este es el ultimo input a comprobar, si son diferentes, este es invalido
 #------------------------------------------------------------
-
 #------------------------------------------------------------
 #---   Subrtuinas para imprimir la ayuda para el comando solicitado.   ---#
 #------------------------------------------------------------
@@ -558,7 +486,6 @@ li $v0 4             #imprimir la cadena
 la $a0 help          #cargamos al registro a0 la direccion de memoria de help
 syscall
 j main_loop
-    
 #Imprimimos la ayuda para el comando help
 print_help:
 li $v0 4                     #imprimir la cadena
@@ -577,7 +504,6 @@ li $v0 4                     #imprimir la cadena
 la $a0 help_args             #cargamos al registro a0 la direccion de memoria de los argumentos
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando mix
 print_mix:
 li $v0 4                    #imprimir la cadena
@@ -593,7 +519,6 @@ li $v0 4                    #imprimir la cadena
 la $a0 mix_args             #cargamos al registro a0 la direccion de memoria de los argumentos
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando coin
 print_coin:
 li $v0 4                     #imprimir la cadena
@@ -609,7 +534,6 @@ li $v0 4                     #imprimir la cadena
 la $a0 coin_args             #cargamos al registro a0 la direccion de memoria de los argumentos
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando song
 print_song:
 li $v0 4                     #imprimir la cadena
@@ -625,7 +549,6 @@ li $v0 4                     #imprimir la cadena
 la $a0 song_args             #cargamos al registro a0 la direccion de memoria de los argumentos
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando rev
 print_rev:
 li $v0 4                    #imprimir la cadena
@@ -656,7 +579,6 @@ li $v0 4                    #imprimir la cadena
 la $a0 file_dir4            #cargamos al registro a0 la direccion de memoria de la especificacion del archivo
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando cat
 print_cat:
 li $v0 4                    #imprimir la cadena
@@ -684,7 +606,6 @@ li $v0 4                    #imprimir la cadena
 la $a0 file_dir4            #cargamos al registro a0 la direccion de memoria de la especificacion del archivo
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando count
 print_count:
 li $v0 4                      #imprimir la cadena
@@ -705,14 +626,13 @@ syscall
 li $v0 4                      #imprimir la cadena
 la $a0 file_dir2              #cargamos al registro a0 la direccion de memoria de la especificacion del archivo
 syscall
-li $v0 4                    #imprimir la cadena
-la $a0 file_dir3            #cargamos al registro a0 la direccion de memoria de la especificacion del archivo
+li $v0 4                      #imprimir la cadena
+la $a0 file_dir3              #cargamos al registro a0 la direccion de memoria de la especificacion del archivo
 syscall
-li $v0 4                    #imprimir la cadena
-la $a0 file_dir4            #cargamos al registro a0 la direccion de memoria de la especificacion del archivo
+li $v0 4                      #imprimir la cadena
+la $a0 file_dir4              #cargamos al registro a0 la direccion de memoria de la especificacion del archivo
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando play
 print_play:
 li $v0 4                     #imprimir la cadena
@@ -730,7 +650,6 @@ li $v0 4                     #imprimir la cadena
 la $a0 play_args             #cargamos al registro a0 la direccion de memoria de los argumentos
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando idk
 print_palindrome:
 li $v0 4                           #imprimir la cadena
@@ -745,7 +664,6 @@ li $v0 4                           #imprimir la cadena
 la $a0 palindrome_args             #cargamos al registro a0 la direccion de memoria de los argumentos
 syscall
 j main_loop
-
 #Imprimimos la ayuda para el comando exit
 print_exit:
 li $v0 4                     #imprimir la cadena
@@ -901,7 +819,6 @@ move $t0 $a0          #apuntador al inicio de arg
 li $v0 1              #asumimos que es un entero valido
 li $v1 0              #acumulador del numero resultante
 li $t1 10             #definimos una base decimal
-
 #Loop para revisar que cada caracter de arg sea un digito
 int_loop:
 lb $t2 0($t0)                  #cargar el siguiente byte de arg
@@ -915,12 +832,10 @@ mul $v1 $v1 $t1                #multiplicamos v1 por 10 y sumamos el digito actu
 add $v1 $v1 $t2
 addi $t0 $t0 1                 #avanzamos al siguiente caracter
 j int_loop
-
 #Si hay un caracter que no es un digito, arg no es valido
 not_int:
 li $v0 0          #no es un entero valido
 jr $ra
-
 end_int_loop:
 jr $ra
 #------------------------------------------------------------
@@ -945,19 +860,16 @@ li $v0 4                        #imprimir la cadena
 la $a0 cross                    #cargamos al registro a0 la direccion de memoria de cross
 syscall
 j next_coin
-
 #Imprimimos el resultado, cara en este caso
 print_face:
 li $v0 4             #imprimir la cadena
 la $a0 face          #cargamos al registro a0 la direccion de memoria de face
 syscall
-
 #Continuamos con el siguiente lanzamiento
 next_coin:
 addi $t1 $t1 -1          #restamos uno al contador principal
 addi $t2 $t2 1           #sumamos uno al contador secundario
 j coin_loop
-
 end_coin_loop:
 j main_loop 
 #------------------------------------------------------------------------------------------------------------#
@@ -971,7 +883,6 @@ bnez $v0 print_many_args          #song no acepta argumentos
 li $v0 4                          #imprimir la cadena
 la $a0 playing_song               #cargamos al registro a0 la direccion de memoria de mix
 syscall
-
 play_songx:
 jal furelise_A1
 jal furelise_A2
@@ -988,7 +899,6 @@ jal furelise_A2
 jal furelise_A1
 jal furelise_A3
 j main_loop
-
 #Clave de Sol: Mi5 - Re#5 - Mi5 - Re#5 - Mi5 - Si - Re5 - Do5 - La - Do - Mi - La - Si
 #Clave de Fa: La2 - Mi3 - La3 - Mi2 - Mi3 - Sol#3/LaB3
 furelise_A1:
@@ -1118,7 +1028,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Mi - Sol#/LaB - Si - Do5 - Mi
 #Clave de Fa: La2 - Mi3 - La3
 furelise_A2:
@@ -1178,7 +1087,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Mi - Do5 - Si -La
 #Clave de Fa: La2 - Mi3 - La3
 furelise_A3:
@@ -1237,7 +1145,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Si - Do5 - Re5 - Mi5 - Sol - Fa5 - Mi5 - Re5 - Fa - Mi5 - Re5 - Do5 - Mi - Re5 - Do5 - Si
 #Clave de Fa: Do3 - Sol3 - Do - Sol2 - Sol3 - Si3 - La2 - Mi3 - La3 - Mi2 - Mi3 - Mi
 furelise_A4:
@@ -1429,7 +1336,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Mi - Mi5 - Mi5 - Mi6 - Re#5 - Mi5 - Re#5
 #Clave de Fa:  Mi - Mi5 - Re#5 - Mi5 - Re#5 - Mi5
 furelise_A5:
@@ -1554,7 +1460,6 @@ beqz $t2 end_find_length            #si es null, terminamos
 addi $t0 $t0 1                      #avanzamos al siguiente caracter
 addi $t1 $t1 1                      #incrementamos el contador
 j find_length
-
 #Terminamos de calcular la longitud de la cadena
 end_find_length:
 li $v0 4
@@ -1565,7 +1470,6 @@ la $t0 buffer            #regresamos el apuntador al inicio
 add $t0 $t0 $t1          #movemos el apuntador al final de la cadena
 subi $t0 $t0 1           #pequeno ajuste para apuntar al ultimo caracter
 la $t3 buffer            #guardamos la direccion inicial del buffer para compararla
-
 print_reverse:
 blt $t0 $t3 end_reverse          #si el apuntador es menor que inicio del buffer, terminamos
 lb $a0 ($t0)                     #cargamos byte actual
@@ -1573,13 +1477,11 @@ li $v0 11                        #imprimir caracter
 syscall
 subi $t0 $t0 1                   #retrocedemos al caracter anterior
 j print_reverse
-
 end_reverse:
 li $v0 4
 la $a0 new_line
 syscall
 j main_loop
-
 #Procesamos el archivo ingresado para revertirlo
 rev_file_buffer:
 addi $sp $sp -24
@@ -1618,7 +1520,6 @@ lb $t2 ($t1)
 li $t3 10                        #'\n' en ASCII
 bne $t2 $t3 print_rev_file
 subi $s2 $s2 1                   #reducimos el contador si es '\n'
-
 print_rev_file:
 li $v0 4
 la $a0 rev_file_out      #imprimimos la cadena que indica el resultado de revertir el archivo 
@@ -1626,7 +1527,6 @@ syscall
 la $t0 buffer            #apuntamos al inicio
 add $t0 $t0 $s2          #apuntamos al final de los datos
 subi $t0 $t0 1           #ultimo caracter valido
-
 print_rev_loop:
 blt $t0 $s3 end_print_rev_file          #si el apuntador es menor que inicio del buffer, terminamos
 lb $a0 ($t0)                            #cargamos el byte actual
@@ -1634,7 +1534,6 @@ li $v0 11                               #imprimimos el caracter
 syscall    
 subi $t0 $t0 1                          #retrocedemos al caracter anterior
 j print_rev_loop
-
 #Simplemente imprimimos el final de la reversa y restauramos registros
 end_print_rev_file:
 li $v0 4
@@ -1648,7 +1547,6 @@ lw $s3 16($sp)
 lw $a0 20($sp)
 addi $sp $sp 24
 j main_loop
-
 #Imprimimos mensaje de error y restauramos registros
 file_rev_error:
 li $v0 55
@@ -1715,17 +1613,14 @@ sb $t2 0($t1)                       #guardamos el caracter en arg1
 addi $t0 $t0 1                      #avanzamos al siguiente caracter en args
 addi $t1 $t1 1                      #avanzamos al siguiente espacio en arg1
 j copy_first_loop
-
 end_first_copy:
 li $t2 0
 sb $t2 0($t1)          #terminamos la cadena con un null
 la $v0 arg1            #regresamos al apuntero al inicio de arg1
 jr $ra
-
 #Obtenemos la segunda cadena como la direccion del segundo archivo
 get_second_arg:
 move $t0 $a0          #apuntamos al inicio de args
-
 #Saltamos la primera cadena hasta el primer espacio o tab
 skip_to_second:
 lb $t2 0($t0)
@@ -1736,7 +1631,6 @@ beq $t2 $t3 skip_spaces            #omitimos los tabs
 beqz $t2 print_args_error          #por si acaso encontramos null antes de un caracter valido
 addi $t0 $t0 1                     #avanzamos al siguiente caracter
 j skip_to_second
-
 #Omitimos todos los espacios o tabs consecutivos
 skip_spaces:
 lb $t2 0($t0)
@@ -1745,14 +1639,11 @@ beq $t2 $t3 skip_spaces_advance          #mientras haya espacios, los omitimos
 li $t3 9
 beq $t2 $t3 skip_spaces_advance          #mientras haya tabs, los omitimos
 j copy_second_loop                       #encontramos el comienzo del segundo file
-
 skip_spaces_advance:
 addi $t0 $t0 1
 j skip_spaces
-
 copy_second_loop:
 la $t1 arg2          #asignamos a $t1 el inicio de arg2
-    
 copy_loop:
 lb $t2 0($t0)                        #cargamos el byte actual
 li $t3 32
@@ -1764,7 +1655,6 @@ sb $t2 0($t1)                        #guardamos el caracter en arg1
 addi $t0 $t0 1                       #avanzamos al siguiente caracter en args
 addi $t1 $t1 1                       #avanzamos al siguiente caracter en arg2
 j copy_loop
-
 end_second_copy:
 li $t2 0
 sb $t2 0($t1)          #terminamos la cadena con null
@@ -1790,7 +1680,6 @@ li $a2 0                            #permisos por defecto
 syscall
 bltz $v0 read_buffer_error          #no se encontro el archivo o hubo un error al abrirlo
 move $s0 $v0                        #guardamos el descriptor del archivo
-
 #Leemos un 'chunk' del archivo
 read_buffer_loop:
 li $v0 14                         #syscall para leer archivo
@@ -1802,7 +1691,6 @@ blez $v0 read_buffer_end          #si no se leyeron bytes, terminamos
 move $t0 $v0                      #guardamos bytes leidos
 move $t1 $s1                      #guardamos bytes leidos
 la $t2 buffer                     #buffer con los datos
-
 #Copiamos byte a byte del buffer temporal al buffer destino
 copy_buffer:
 beqz $t0 after_copy          #si ya no hay bytes por copiar, terminmos
@@ -1812,14 +1700,12 @@ addi $t1 $t1 1               #avanzamos el apuntador destino
 addi $t2 $t2 1               #avanzamos el apuntador fuente
 addi $t0 $t0 -1              #decrementamos contador de bytes
 j copy_buffer
-
 #Actualizamos apuntadores y el contador total tras copiar el 'chunk'
 after_copy:
 sub $t1 $t1 $s1          #cantidad de bytes copiados
 add $s2 $s2 $t1          #acumulamos el total
 add $s1 $s1 $t1          #avanzamos el apuntador del destino
 j read_buffer_loop
-
 #Cerramos el archivo y restauramos registros
 read_buffer_end:
 li $v0 16             #syscall para cerrar archivo
@@ -1832,7 +1718,6 @@ lw $s1 8($sp)
 lw $s2 12($sp)
 addi $sp $sp 16
 jr $ra
-
 #Imprimimos mensaje de error y restauramos los registros
 read_buffer_error:
 li $v0 55
@@ -1880,7 +1765,6 @@ syscall
 blez $v0 end_read          #si no hay que leer, terminamos
 move $t2 $v0               #creamos un contador del numero de bytes leídos
 la $t1 buffer              #asignamos a $t1 como el apuntador al buffer
-
 #Loop para contar los caracteres del archivo  
 count_chars_loop:
 lb $t3 0($t1)                  #cargamos el byte actual
@@ -1892,14 +1776,12 @@ beq $t3 $t4 skip_char          #ignoramos el espacio
 li $t4 9                       #tab en ASCII
 beq $t3 $t4 skip_char          #ignoramos el tab
 addi $t0 $t0 1                 #de otro modo incrementamos el contador
-
 #Omitimos los chars innecesarios de contar
 skip_char:
 addi $t1 $t1 1                     #avanzamos al siguiente byte
 addi $t2 $t2 -1                    #decrementamos contador de bytes
 bgtz $t2 count_chars_loop          #si quedan bytes continuamos
 j read_loop
- 
 end_read:
 li $v0 4                     #imprimir cadena 
 la $a0 count_result          #cargamos al registro a0 la direccion de memoria de count_result
@@ -1914,20 +1796,17 @@ li $v0 16                    #syscall para cerrar un archivo.
 move $a0 $s0                 #movemos el descriptor del archivo a $a0
 syscall
 j main_loop
-
 #Definimos un contador de los argumentos ingresados por el usuario
 count_args:
 la $t0 args          #asignamos args a $t0
 li $v0 0             #asignamos a $v0 el contador de argumentos
 li $t2 32            #espacio en ASCII
-
 #Loop para contar los argumentos 
 count_args_loop:
 lb $t1 0($t0)                   #cargamos a $t0 el byte actual
 beqz $t1 end_count              #si llegamos al null terminamos
 beq $t1 $t2 skip_space          #omitimos los espacios
 addi $v0 $v0 1                  #aumentamos el contador pues el caracter anterior fue un espacio
-
 #Nos saltamos la cadena encontrada hasta el proximo espacio o null
 skip_token:
 lb $t1 0($t0)                      #cargamos a $t0 el byte actual
@@ -1935,17 +1814,14 @@ beqz $t1 end_count                 #si es null, terminamos de contar
 beq $t1 $t2 continue_loop          #si es un espacio terminamos la cadena y saltamos al siguiente
 addi $t0 $t0 1                     #si no es espacio ni null, seguimos avanzando en la cadena
 j skip_token                       #repetimos el loop hasta terminar la cadena
-
 #Terminamos de recorrer la cadena hasta el final y continuamos leyendo el buffer
 continue_loop:
 addi $t0 $t0 1
 j count_args_loop          #regresamos al loop para continuar con el conteo
-
 #Ignoramos espacios consecutivos para evitar contar argumentos vacios
 skip_space:
 addi $t0 $t0 1             #avanzamos un byte, saltamos el espacio extra
 j count_args_loop          #regresamos al loop para continuar con el conteo
-
 #Terminamos el conteo de argumentos
 end_count:
 jr $ra
@@ -1976,7 +1852,6 @@ la $a0 args                   #cargamos el argumento del usuario en $a0
 la $a1 song1                  #cargamos song1 en $a1
 jal strcmp                    #llamamos a strcmp con los valores (args, song1)
 beq $v0 0 is_song2            #si son diferentes comprobamos la siguiente cancion
-
 #Reproducimos song1
 play_song1:
 li $v0 4                     #imprimir la cadena
@@ -2027,7 +1902,6 @@ jal snow_A1
 jal snow_A1
 jal snow_A2
 j main_loop
-
 #Clave de Sol: Fa3 - Sol#3 - Do# - Fa - Do# - Sol#3
 snow_A1:
 addi $sp $sp -4
@@ -2071,7 +1945,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa3 - Sol#3 - Do# - Fa - Sol# - Do#5 - Fa5
 snow_A2:
 addi $sp $sp -4
@@ -2125,7 +1998,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa#3 - La#3 - Re# - Fa# - Re# - La#3 
 snow_A3:
 addi $sp $sp -4
@@ -2170,7 +2042,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Sol#3 - Do - Re# - Sol# - Re# - Do
 snow_A4:
 addi $sp $sp -4
@@ -2214,7 +2085,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa3 - Sol#3 - Do# - Fa - Do# - Sol#3
 snow_A5:
 addi $sp $sp -4
@@ -2258,7 +2128,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa3 - Sol#3 - Do# - Fa - Do# - Do - Do# - Fa3 - La#3 - Fa - Do# - La#3
 snow_A6:
 addi $sp $sp -4
@@ -2338,7 +2207,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa3 - La#3 - Do# - Fa - Do# - La#3
 snow_A7:
 addi $sp $sp -4
@@ -2382,7 +2250,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa#3 - La#3 - Re# - Fa# - Fa#3 - Sol3 - Sol#3 - Do - Re# - Sol# - Re# - Do
 snow_A8:
 addi $sp $sp -4
@@ -2462,7 +2329,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa3 - Sol#3 - Do# - Fa - Sol#3 - Re#
 snow_A9:
 addi $sp $sp -4
@@ -2506,7 +2372,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Do5 - La# - Fa - Do# - Do - La#3
 snow_A10:
 addi $sp $sp -4
@@ -2550,7 +2415,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa3 - La3 - Do - Fa - Do - La3
 snow_A11:
 addi $sp $sp -4
@@ -2594,7 +2458,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: La#3 - Do# - Fa - La# - Sol# - Fa#
 snow_A12:
 addi $sp $sp -4
@@ -2638,7 +2501,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Sol#3 - Do - Re# - Sol# - Re# - Do - Do# - Fa - Sol# - Do#5 - Sol# - Fa
 snow_A13:
 addi $sp $sp -4
@@ -2715,7 +2577,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa - La#3 - Do# - Re# - La#3 - Do#
 snow_A14:
 addi $sp $sp -4
@@ -2759,7 +2620,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Sol#3 - Do - Re# - Fa# - Re# - Do
 snow_A15:
 addi $sp $sp -4
@@ -2803,7 +2663,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Sol#3 - La#3 - Do# - Fa - Do# - Sol#3 - La3 - Do - Re# - Fa - Re# - La3
 snow_A16:
 addi $sp $sp -4
@@ -2883,12 +2742,10 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa3 - La#3 - Do# - Fa - Do# - Sol#3
 snow_A17:
 addi $sp $sp -4
 sw $ra 0($sp)
-
 lw $a0 mid_pause          #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall
@@ -2928,7 +2785,6 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
 #Clave de Sol: Fa#3 - La#3 - Do# - Fa# - Do# - La#3 
 snow_A18:
 addi $sp $sp -4
@@ -2978,11 +2834,10 @@ jr $ra
 #-------------------------------#
 #Comprobamos si la cancion que el usuario solicito es song2
 is_song2:
-la $a0 args                   #cargamos el argumento del usuario en $a0
-la $a1 song2                  #cargamos song2 en $a1
-jal strcmp                    #llamamos a strcmp con los valores (args, song2)
-beq $v0 0 is_song3            #si son diferentes comprobamos la siguiente cancion
-
+la $a0 args                           #cargamos el argumento del usuario en $a0
+la $a1 song2                          #cargamos song2 en $a1
+jal strcmp                            #llamamos a strcmp con los valores (args, song2)
+beq $v0 0 print_invalid_args          #si son diferentes la cancion solicitada no es valida
 #Reproducimos song2
 play_song2:
 li $v0 4                     #imprimir la cadena
@@ -3015,8 +2870,66 @@ jal pirate_A5
 jal pirate_A12
 jal pirate_A13
 jal pirate_A14
+jal pirate_Alado5
+jal pirate_A15
+jal pirate_A16
+jal pirate_Alarefa5
+jal pirate_A17
+jal pirate_Ado5
+jal pirate_A18
+jal pirate_A19
+jal pirate_A20
+jal pirate_A17
+jal pirate_A18
+jal pirate_A15
+jal pirate_A21
+jal pirate_A22
+jal pirate_A16
+jal pirate_A23
+jal pirate_A24
+jal pirate_A25
+jal pirate_A26
+jal pirate_A27
+jal pirate_A28
+jal pirate_A28
+jal pirate_A29
+jal pirate_A29
+jal pirate_A29
+jal pirate_A30
+jal pirate_A31
+jal pirate_A31
+jal pirate_A31
+jal pirate_A31
+jal pirate_A32
+jal pirate_A33
+jal pirate_A33
+jal pirate_A33
+jal pirate_A34
+jal pirate_A33
+jal pirate_A35
+jal pirate_A36
+jal pirate_A37
+jal pirate_A38
+jal pirate_A39
+jal pirate_A40
+jal pirate_A41
+jal pirate_A42
+jal pirate_A43
+jal pirate_A44
+jal pirate_A44
+jal pirate_A44
+jal pirate_A44
+jal pirate_A45
+jal pirate_A46
+jal pirate_A47
+jal pirate_A44
+jal pirate_A44
+jal pirate_A48
+jal pirate_A44
+jal pirate_A45
+jal pirate_A46
+jal pirate_A49
 j main_loop
-
 #Clave de Sol: Re3 - Re3 - Re3 - Re3 - Re3 - Re3
 pirate_A1:
 addi $sp $sp -4
@@ -3039,7 +2952,7 @@ lw $a1 dot_cor            #duracion de la nota
 lw $a0 re3                #nota Re3
 li $v0 31                 #syscall para reproducir la nota
 syscall
-lw $a0 midex_pause          #pausa entre notas
+lw $a0 midex_pause        #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall
 lw $a1 min_cor            #duracion de la nota
@@ -3053,7 +2966,7 @@ lw $a1 dot_cor            #duracion de la nota
 lw $a0 re3                #nota Re3
 li $v0 31                 #syscall para reproducir la nota
 syscall
-lw $a0 midex_pause          #pausa entre notas
+lw $a0 midex_pause        #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall
 lw $a1 min_cor            #duracion de la nota
@@ -3070,7 +2983,6 @@ jr $ra
 pirate_A2:
 addi $sp $sp -4
 sw $ra 0($sp)
-lw $a1 min_cor            #duracion de la nota
 lw $a0 re3                #nota Re3
 li $v0 31                 #syscall para reproducir la nota
 syscall
@@ -3111,7 +3023,7 @@ syscall
 lw $a0 do                 #nota Re3
 li $v0 31                 #syscall para reproducir la nota
 syscall
-lw $a0 minex_pause        #pausa entre notas
+lw $a0 min_pause        #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall
 lw $ra 0($sp)
@@ -3201,7 +3113,7 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-#Clave de Sol: Fa - Sol - La3/Do/Mi - La3/Do/Mi - Re - Do
+#Clave de Sol: Fa - Sol - La3/Do/Mi - La3/Do/Mi - Re
 pirate_A6:
 addi $sp $sp -4
 sw $ra 0($sp)
@@ -3214,7 +3126,7 @@ syscall
 lw $a0 sol                #nota Sol
 li $v0 31                 #syscall para reproducir la nota
 syscall
-lw $a0 minex_pause        #pausa entre notas
+lw $a0 min_pause        #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall 
 lw $a1 dot_cor            #duracion de la nota
@@ -3268,7 +3180,7 @@ syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-#Clave de Sol: Do - Fa/La/Re - La3 - Do
+#Clave de Sol: Do - Fa3/La3/Re - La3 - Do
 pirate_A7:
 addi $sp $sp -4
 sw $ra 0($sp)
@@ -3291,7 +3203,7 @@ syscall
 li $a0 360                #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall
-lw $a0 min_pause          #pausa entre notas
+lw $a0 minex_pause          #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall
 lw $a1 min_cor            #duracion de la nota
@@ -3304,7 +3216,7 @@ syscall
 lw $a0 do                 #nota Do
 li $v0 31                 #syscall para reproducir la nota
 syscall
-lw $a0 minex_pause        #pausa entre notas
+lw $a0 min_pause        #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall 
 lw $ra 0($sp)
@@ -3449,7 +3361,7 @@ syscall
 lw $a0 la_note            #nota La
 li $v0 31                 #syscall para reproducir la nota
 syscall
-lw $a0 min_pause          #pausa entre notas
+lw $a0 minex_pause          #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall 
 lw $ra 0($sp)
@@ -3642,39 +3554,1967 @@ syscall
 li $a0 360                #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall 
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La - Do5
+pirate_Alado5:
+addi $sp $sp -4
+sw $ra 0($sp)
 lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 do5                 #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Fa/La/Re5 - Fa/La/Re5
+pirate_A15:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
 lw $a0 minex_pause        #pausa entre notas
 li $v0 32                 #syscall sleep
 syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-
-#Clave de Sol: 
-pirate_A15:
+#Clave de Sol: Re5 - Mi5 - La#/Re5/Fa5
+pirate_A16:
 addi $sp $sp -4
 sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
 lw $ra 0($sp)
 addi $sp $sp 4
 jr $ra
-#------------------------------------------------------------
-#-------------------------------#
-#---    Codigo para song3    ---#
-#-------------------------------#
-#Comprobamos si la cancion que el usuario solicito es song5
-is_song3:
-la $a0 args                           #cargamos el argumento del usuario en $a0
-la $a1 song3                          #cargamos song3 en $a1
-jal strcmp                            #llamamos a strcmp con los valores (args, song3)
-beq $v0 0 print_invalid_args          #si son diferentes la cancion solicitada no es valida
-
-#Reproducimos song3
-play_song3:
-li $v0 4                     #imprimir la cadena
-la $a0 playing_song          #cargamos al registro a0 la direccion de memoria de mix
+#Clave de Sol: La#/Re5/Fa5
+pirate_Alarefa5:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
 syscall
-
-j main_loop
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Fa5 - Sol5 - La/Do5/Mi5 - La/Do5/Mi5 - Re5
+pirate_A17:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Do5
+pirate_Ado5:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Do5 - Fa/La/Re5 - La - Do5
+pirate_A18:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 350                #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note             #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 360                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Fa/La#/Re5 - Fa/La#/Re5
+pirate_A19:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s               #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re5 - Mi5 - La/Do5/Fa5 - La/Do5/Fa5
+pirate_A20:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re5 - Fa5 - La#/Re5/Sol5 - La#/Re5/Sol5 - Sol5 - La5
+pirate_A21:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re5/Sol5/La#5 - Re5/Sol5/La#5 - La5 - Sol5 - La5/Re5 - Re5
+pirate_A22:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La#5/Re5/Fa5 - La#5/Re5/Sol5 - Re5/Fa5/La5 - Re5
+pirate_A23:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 re5                #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a0 25          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re5 - Fa5 - Sol/Do#5/Mi5 - Sol/Do#5/Mi5 - Fa/Re5 - Mi/Do#5 - Fa/Re5
+pirate_A24:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s5              #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a1 min_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s5              #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s5              #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Fa/Re5 - Sol/Mi5 - La/Fa5 - La/Fa5 - La/Fa5 - La#/Sol5 - La/La5
+pirate_A25:
+addi $sp $sp -4
+sw $ra 0($sp)
+li $a1 320                #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+li $a1 205                #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 225                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 225                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+li $a1 320                #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+li $a1 350                #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 365                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Fa5 - Re5 - La - La#/Re5/La#5 - Fa5 - Re5 - La#
+pirate_A26:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+li $a1 320                #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 mid_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 320                #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a1 min_cor            #duracion de la nota
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+li $a1 320                #duracion de la nota
+lw $a0 la_s               #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re - La3 - Fa3/La3/Re - Mi3/La3/Do#
+pirate_A27:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re                 #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 la3                #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 fa3                #nota Fa3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la3                #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re                 #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 mid_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 mi3                #nota Mi3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la3                #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s               #nota Do#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Do#5/Sol5
+pirate_A28:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 do_s5              #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause         #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La/Re5/Fa5/La5
+pirate_A29:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La#/Sol5/La#5 - La/Fa5/La5
+pirate_A30:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_s               #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Sol/Do5/Mi5/Sol5
+pirate_A31:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La/Do5/Fa5/La5
+pirate_A32:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La/Fa5/La5
+pirate_A33:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La#/Fa5/La#5
+pirate_A34:
+addi $sp $sp -4
+sw $ra 0($sp)
+li $a0 50                 #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a0 50                 #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Sol/La#5/Re5/Sol5 - Fa/La#5/Re5/Fa5 - Mi/La/Do#5/Mi5 - Re/Fa/La/Re5
+pirate_A35:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+li $a0 100                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a1 min_cor            #duracion de la nota
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s5                #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 re                 #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall 
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re - Mi - La3/Fa - Sol - La
+pirate_A36:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re                 #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 320                #duracion de la nota
+lw $a0 la3                #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La#3/Sol - La3/Fa - Sol3/Mi - La3/Fa - Do/Sol - Do/La
+pirate_A37:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 la_s3              #nota La#3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la3                #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol3               #nota Sol3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la3                #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 do                 #nota Do
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 do                 #nota Do
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Do/Mi/Sol - Fa - Sol - Do/Fa/La - Sol - Fa
+pirate_A38:
+addi $sp $sp -4
+sw $ra 0($sp)
+li $a1 320                #duracion de la nota
+lw $a0 do                 #nota Do
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 320                #duracion de la nota
+lw $a0 do                 #nota Do
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Sol3/Mi - La3/Fa - Sol3/Mi - Fa3/Re - Fa3/Re - Sol3/Mi - Do - Fa3/Re
+pirate_A39:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 sol3               #nota Sol3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la3                #nota La3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol3               #nota Sol3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa3                #nota Fa3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re                 #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa3                #nota Fa3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re                 #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol3               #nota Sol3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi                 #nota Mi
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 do                 #nota Do
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 320                #duracion de la nota
+lw $a0 fa3                #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re                 #nota Re
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 360                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re5 - Mi5 - La/Re5/Fa5 - Mi5 - Fa5
+pirate_A40:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a0 350                #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 370                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Do5/Mi5/Sol5 - Do5/Fa5 - Do5/Mi5/Sol5 - Do5/Fa5/La5 - Do5/Mi5/Sol5 - La/Re5/Fa5 - Fa/La#/Re5
+pirate_A41:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 320                #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Re5 - Mi5 - La/Re5/Fa5 - La/Re5/Sol5 - La/Re5/La5 - Re5/Sol5/La#5 - Re5 - La#/Re5/Sol5 - La/Re5/Fa5
+pirate_A42:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la_s               #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 320                #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 335                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Sol5 - Mi5 - Fa/La/Re5 - Mi5 - Sol/Do#5 - La/Re5/Fa5/La5 - La#/Re5/Fa5/La#5
+pirate_A43:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mid_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 330                #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 360                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s5              #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mid_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 320                #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 325                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mid_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 325                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mid_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: La/Do5/Fa5/La5
+pirate_A44:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Sol/Do5/Mi5/Sol5 - Sol/La#/Re5/Sol5 - Fa/La/Re5/Fa5
+pirate_A45:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 midex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 sol5               #nota Sol5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 midex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 midex_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Sol/Do#5/Mi5 - La/Re5/Fa5 - Sol/Do#5/Mi5
+pirate_A46:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s5              #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do_s5              #nota Do#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Sol/Mi5 - Fa/Re5 - Re5 - Mi5 - Fa5
+pirate_A47:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 min_cor            #duracion de la nota
+lw $a0 sol                #nota Sol
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 dot_cor            #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 midex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 340                #duracion de la nota
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 380                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+li $a1 340                #duracion de la nota
+lw $a0 la_s               #nota La#
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_s5              #nota La#5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 380                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mi5                #nota Mi5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+li $a0 100                #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Do5/Fa5/La5/Do6
+pirate_A48:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a0 minex_pause        #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 min_cor            #duracion de la nota
+lw $a0 do5                #nota Do5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 fa5                #nota Fa5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la5                #nota La5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 do6                #nota Do6
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 min_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Clave de Sol: Fa/La/Re5 - Re3/La2
+pirate_A49:
+addi $sp $sp -4
+sw $ra 0($sp)
+lw $a1 dot_neg              #duracion de la nota
+lw $a0 fa                 #nota Fa
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la_note            #nota La
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 re5                #nota Re5
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 dob_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 dob_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a1 redonda            #duracion de la nota
+lw $a0 re3                #nota Fa3
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 la2                #nota La2
+li $v0 31                 #syscall para reproducir la nota
+syscall
+lw $a0 red_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $a0 mid_pause          #pausa entre notas
+li $v0 32                 #syscall sleep
+syscall
+lw $ra 0($sp)
+addi $sp $sp 4
+jr $ra
+#Iba a haber song3 pero por tiempo y porque ya son muchas lineas, fue descartada:)
 #------------------------------------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------------------------------------#
@@ -3717,7 +5557,6 @@ print_not_pal:
 li $v0 4
 la $a0 not_palindrome
 syscall
-
 #Imprimimos los resultados y restauramos los registro
 print_pal_result:
 li $v0 4
@@ -3732,7 +5571,6 @@ lw $s1 8($sp)
 lw $s2 12($sp)
 addi $sp $sp 16
 j main_loop
-
 #Revertimos la cadena
 rev_arg:
 addi $sp $sp -16
@@ -3747,7 +5585,6 @@ jal strlen
 move $t0 $v0             #longitud
 add $t1 $s0 $t0          #apuntador al final
 subi $t1 $t1 1           #ultimo caracter
-
 #Loop para invertir la cadena caracter por caracter
 reverse_loop:
 bltz $t0 reverse_done          #si la longitud es negativa, terminamos (caso borde)
@@ -3757,7 +5594,6 @@ addi $s1 $s1 1                 #avanzamos en el buffer de salida
 subi $t1 $t1 1                 #retrocedemos en la cadena original
 subi $t0 $t0 1                 #decrementamos el contador
 j reverse_loop
-    
 #Terminamos la cadena revertida y restauramos los registros
 reverse_done:
 sb $zero ($s1)          #definimos el final de la cadena
@@ -3768,18 +5604,15 @@ lw $s1 8($sp)
 lw $s2 12($sp)
 addi $sp $sp 16
 jr $ra
-
 #Calculamos la longitud de cadena
 strlen:
 li $v0 0          #definimos un contador de la longitud
-
 strlen_loop:
 lb $t0 ($a0)                  #cargamos el byte actual
 beqz $t0 strlen_done          #si es null, terminamos
 addi $v0 $v0 1                #incrementamos el contador
 addi $a0 $a0 1                #avanzamos al siguiente caracter
 j strlen_loop
-
 #Regresamos la longitud en $v0
 strlen_done:
 jr $ra    
@@ -3810,7 +5643,6 @@ j main_loop
 strcmp:
 move $t0 $a0          #asignamos a $t0 el comando a comparar
 move $t1 $a1          #asignamos a $t1 el input del usuario
-
 #Comparamos byte a byte ambas cadenas mediante un loop
 strcmp_loop:
 lb $t2 0($t0)               #cargamos el siguiente byte del comando a $t2
@@ -3820,12 +5652,10 @@ beqz $t2 cmpeq              #si llegamos al final de ambas cadenas, son iguales
 addiu $t0 $t0 1             #avanzamos al siguiente byte del comando
 addiu $t1 $t1 1             #avanzamos al siguiente byte del input
 j strcmp_loop               #repetimos el ciclo con el siguiente caracter
-
 #Las cadenas son distintas
 cmpneq:
 li $v0 0          #asignamos cero a $v0, regresamos falso
 jr $ra
-
 #Las cadenas son iguales
 cmpeq:
 li $v0 1          #asignamos uno a $v0, regresamos true
@@ -3838,7 +5668,6 @@ jr $ra
 clear_string:
 move $t0 $a0          #apuntamos al inicio de args
 move $v0 $a0          #apuntamos el retorno (el inicio)
-   
 #Buscamos primer caracter que no sea un espacio
 find_start:
 lb $t1 0($t0)
@@ -3849,12 +5678,10 @@ li $t2 9                              #tab en ASCII
 beq $t1 $t2 skip_space_start          #omitimos los espacios antes de la cadena
 move $v0 $t0
 j find_end
-
 #Omitimos el espacio
 skip_space_start:
 addi $t0 $t0 1
 j find_start
-    
 #Buscamos el final de arg
 find_end:
 lb $t1 0($t0)
@@ -3865,7 +5692,6 @@ li $t2 9                               #tab en ASCII
 beq $t1 $t2 replace_with_null
 addi $t0 $t0 1
 j find_end
-    
 replace_with_null:
 li $t1 0
 sb $t1 0($t0)          #terminamos la cadena
@@ -3881,50 +5707,41 @@ print_invalid_command:
 li $v0 55                       #cargamos el mensaje de dialogo para el error
 la $a0 invalid_command          #cargamos el mensaje a mostrar en el dialogo
 j print_error
-
 #Mensaje de error cuando el usuario ingresa un argumento o argumentos invalido
 print_invalid_args:
 li $v0 55                    #cargamos el mensaje de dialogo para el error
 la $a0 invalid_args          #cargamos el mensaje a mostrar en el dialogo
 j print_error
-
 #Mensaje de error de muchos argumentos
 print_many_args:
 li $v0 55                 #cargamos el mensaje de dialogo para el error
 la $a0 many_args          #cargamos el mensaje a mostrar en el dialogo
 j print_error
-
 #Mensaje de error de pocos argumentos
 print_few_args:
 li $v0 55                #cargamos el mensaje de dialogo para el error
 la $a0 few_args          #cargamos el mensaje a mostrar en el dialogo
 j print_error
-
 #Mensaje de error cuando el usuario ingresa un numero muy alto de monedas
 print_many_coins:
 li $v0 55                  #cargamos el mensaje de dialogo para el error
 la $a0 many_coins          #cargamos el mensaje a mostrar en el dialogo
 j print_error
-
 #Mensaje de error al leer argumentos
 print_args_error:
 li $v0 55                  #cargamos el mensaje de dialogo para el error
 la $a0 args_error          #cargamos el mensaje a mostrar en el dialogo
 j print_error
-
 #Mensaje de error cuando el usuario ingresa un archivo inexistente
 print_file_error:
 li $v0 55                  #cargamos el mensaje de dialogo para el error
 la $a0 file_error          #cargamos el mensaje a mostrar en el dialogo
 j print_error
-    
 #Imprimimos el error correspondiente y volvemos al main
 print_error:
 li $a1 0          #tipo de icon
 syscall
 j main_loop
-#------------------------------------------------------------------------------------------------------------#
-
 #------------------------------------------------------------------------------------------------------------#
                                #---   Finalizamos todo el programa   ---#                    
 #------------------------------------------------------------------------------------------------------------#
